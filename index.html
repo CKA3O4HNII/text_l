@@ -6,59 +6,218 @@
     <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
     <title>Символизм в русской литературе</title>
     <style>
-        :root{ --bg:#f7f7f7; --card:#fff; --accent:#2b6cb0; --muted:#6b7280 }
+        /* Чёрный минимализм */
+        :root{ --bg:#000; --fg:#eef2ff; --muted:#9aa3b2; --accent:#69d2ff }
         html,body{height:100%;}
-        body { font-family: Inter, Arial, Helvetica, sans-serif; margin: 0; padding: 24px; background:var(--bg); color:#111; }
-        .site { max-width: 1000px; margin: 0 auto; }
-        header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px }
-        .brand { font-weight:600; color:var(--accent) }
-        nav a { color:var(--muted); text-decoration:none; margin-left:12px }
-        .card { background:var(--card); padding:20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-radius: 10px; }
-        .embed-wrap { display:flex; justify-content:center; }
-        .meta { color:var(--muted); font-size:0.95rem; margin-bottom:12px }
-        footer { margin-top:18px; color:var(--muted); font-size:0.9rem; text-align:center }
-        @media (max-width:640px){ header{flex-direction:column; align-items:flex-start} }
+        body{margin:0;font-family: Inter, Arial, Helvetica, sans-serif;background:linear-gradient(180deg,#000 0%, #070707 100%);color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        .deck{position:relative;max-width:1100px;margin:40px auto;min-height:68vh}
+        .slide{position:absolute;inset:0;padding:48px;border-radius:12px;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;opacity:0;transform:translateX(30px) scale(.995);transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .45s ease;backface-visibility:hidden}
+        .slide.active{opacity:1;transform:translateX(0) scale(1);z-index:2}
+        h1{font-size:2.2rem;margin:0 0 8px 0;letter-spacing:.6px}
+        h2{font-size:1.15rem;margin:0 0 6px 0;color:var(--accent)}
+        p{color:var(--muted);line-height:1.45;margin:0 0 12px 0}
+        .lead{font-size:1.05rem;color:#dfe7ff}
+        .controls{position:fixed;right:24px;bottom:24px;display:flex;gap:8px;align-items:center}
+        .btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--fg);padding:10px 12px;border-radius:8px;cursor:pointer}
+        .progress{height:6px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;width:220px}
+        .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#66f6ff);width:0%;transition:width .4s ease}
+        .meta{position:absolute;left:48px;bottom:28px;color:var(--muted);font-size:0.9rem}
+        .author-figure{display:flex;gap:20px;align-items:center}
+        .author-figure img{width:180px;height:180px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.06)}
+        .works{margin-top:10px;color:#cfe9ff}
+        .quote{font-style:italic;color:#fff;margin-top:10px}
+        .note{font-size:0.85rem;color:var(--muted);margin-top:12px}
+        @media (max-width:900px){.author-figure img{width:120px;height:120px}.deck{padding:24px;margin:20px}}
     </style>
 </head>
 <body>
-    <div class="site">
-        <header>
-            <div>
-                <div class="brand">Символизм — презентация</div>
-                <div style="font-size:0.9rem;color:#444">Адаптировано для GitHub Pages</div>
+    <div class="deck" id="deck">
+        <!-- Слайды -->
+        <section class="slide active" data-index="0">
+            <h1>Символизм в русской литературе</h1>
+            <div class="lead">Введение — ключевые идеи, этапы и авторы символизма (конец XIX — начало XX века)</div>
+            <div class="quote">«Искусство — это храм, в котором мы ищем смыслы»</div>
+            <div class="note">Управление: ПКМ / Пробел / ↑ — вперед, ← — назад</div>
+        </section>
+
+        <section class="slide" data-index="1">
+            <h2>Предпосылки возникновения</h2>
+            <p>Кризис позитивизма, интерес к мистицизму, влияние Бодлера и французских символистов, духовный поиск интеллигенции и социальные изменения создали почву для символизма.</p>
+        </section>
+
+        <section class="slide" data-index="2">
+            <h2>Старший символизм (1890-е — начало 1900-х)</h2>
+            <p class="lead">Декаданс, меланхолия, мистицизм. Символы природы и города, темы смерти и красоты.</p>
+            <div class="works">Ключевые фигуры: Валерий Брюсов, Константин Бальмонт, Зинаида Гиппиус, Дмитрий Мережковский</div>
+        </section>
+
+        <section class="slide" data-index="3">
+            <h2>Младший символизм (начало 1900-х)</h2>
+            <p class="lead">Теософия, мистический оптимизм, синтез искусств — театр, музыка и поэзия.</p>
+            <div class="works">Ключевые фигуры: Александр Блок, Андрей Белый, Вячеслав Иванов</div>
+        </section>
+
+        <!-- Авторы — будут подгружаться из Википедии -->
+        <section class="slide" data-index="4" data-wiki="Валерий Брюсов">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Валерий Брюсов</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
             </div>
-            <nav>
-                <a href="#">Главная</a>
-                <a href="#about">О презентации</a>
-                <a href="#source">Исходники</a>
-            </nav>
-        </header>
+        </section>
 
-        <main class="card">
-            <h1 style="margin-top:0;font-size:1.25rem">Символизм в русской литературе</h1>
-            <div class="meta">Интерактивная презентация встраивается через iframe</div>
-
-            <div class="embed-wrap">
-                <iframe src="https://gamma.app/embed/bvvtoq3980h1pgf"
-                                style="width: 700px; max-width: 100%; height: 450px; border:0;"
-                                allow="fullscreen"
-                                title="Символизм в русской литературе"></iframe>
+        <section class="slide" data-index="5" data-wiki="Константин Бальмонт">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Константин Бальмонт</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
             </div>
+        </section>
 
-            <section id="about" style="margin-top:16px">
-                <h2 style="font-size:1rem;margin-bottom:8px">О презентации</h2>
-                <p style="color:var(--muted);margin-top:0">Это встраиваемая презентация, размещённая на внешнем сервисе. Здесь мы оборачиваем её в простой статический сайт для публикации через GitHub Pages.</p>
-            </section>
+        <section class="slide" data-index="6" data-wiki="Зинаида Гиппиус">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Зинаида Гиппиус</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
+            </div>
+        </section>
 
-            <section id="source" style="margin-top:12px">
-                <h3 style="font-size:0.95rem;margin-bottom:8px">Исходники</h3>
-                <p style="color:var(--muted);margin-top:0">Файл <code>index.html</code> в корне репозитория содержит сайт. Для автоматического деплоя настроен workflow GitHub Actions.</p>
-            </section>
-        </main>
+        <section class="slide" data-index="7" data-wiki="Дмитрий Мережковский">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Дмитрий Мережковский</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
+            </div>
+        </section>
 
-        <footer>
-            Развёрнуто с помощью GitHub Pages — обновляется при пуше в ветку <code>main</code> (workflow создаёт ветку <code>gh-pages</code>).
-        </footer>
+        <section class="slide" data-index="8" data-wiki="Александр Блок">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Александр Блок</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="9" data-wiki="Андрей Белый">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Андрей Белый</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="10" data-wiki="Вячеслав Иванов">
+            <div class="author-figure">
+                <img alt="photo" src="" class="author-photo" />
+                <div>
+                    <h2>Вячеслав Иванов</h2>
+                    <p class="meta author-bio">Загрузка биографии...</p>
+                    <div class="works author-works"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="11">
+            <h2>Упадок символизма (около 1910)</h2>
+            <p class="lead">Причины: элитарность, отрыв от жизни, исторические перемены и появление новых движений — акмеизма и футуризма.</p>
+        </section>
+
+        <section class="slide" data-index="12">
+            <h2>Заключение</h2>
+            <p>Символизм предложил новые способы выражения через символы и метафоры. Он подготовил почву для следующих авангардных и нео-классических течений.</p>
+            <p class="note">Все биографии и фотографии получены через API Википедии (ru.wikipedia.org). Цитаты и произведения — выбирались из открытых источников (вики-страницы авторов).</p>
+        </section>
+
     </div>
+
+    <div class="controls" aria-hidden>
+        <button class="btn" id="prev">← Назад</button>
+        <div class="progress" title="Прогресс"><i id="prog"></i></div>
+        <button class="btn" id="next">Вперёд →</button>
+    </div>
+
+    <script>
+        // Презентация: навигация, анимации и динамическая подгрузка биографий с Википедии
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        let idx = 0;
+
+        function show(i){
+            if(i<0) i=0;
+            if(i>=slides.length) i=slides.length-1;
+            slides.forEach(s=>s.classList.remove('active'));
+            slides[i].classList.add('active');
+            idx = i;
+            updateProgress();
+            maybeLoadWiki(slides[i]);
+        }
+
+        function next(){ if(idx < slides.length-1) show(idx+1); }
+        function prev(){ if(idx > 0) show(idx-1); }
+
+        document.getElementById('next').addEventListener('click', ()=> next());
+        document.getElementById('prev').addEventListener('click', ()=> prev());
+
+        // Клавиши и ПКМ: пространство и стрелка вверх = вперед; стрелка влево = назад
+        document.addEventListener('keydown', (e)=>{
+            if(e.code === 'Space' || e.code === 'ArrowUp'){ e.preventDefault(); next(); }
+            else if(e.code === 'ArrowLeft' || e.code === 'ArrowDown'){ e.preventDefault(); prev(); }
+        });
+
+        // ПКМ — использовать для перехода вперёд (отменяем контекстное меню)
+        document.addEventListener('contextmenu', (e)=>{ e.preventDefault(); next(); });
+
+        function updateProgress(){
+            const p = Math.round((idx+1)/slides.length*100);
+            document.getElementById('prog').style.width = p + '%';
+        }
+
+        // Подгрузка биографии и фото автора через REST API Википедии (ru)
+        async function maybeLoadWiki(slide){
+            const title = slide.dataset.wiki;
+            if(!title) return;
+            if(slide.dataset.loaded) return;
+            const bioEl = slide.querySelector('.author-bio');
+            const imgEl = slide.querySelector('.author-photo');
+            const worksEl = slide.querySelector('.author-works');
+            try{
+                const res = await fetch('https://ru.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title));
+                if(!res.ok) throw new Error('no wiki');
+                const data = await res.json();
+                bioEl.textContent = data.extract ? data.extract : (data.description || '—');
+                if(data.thumbnail && data.thumbnail.source) imgEl.src = data.thumbnail.source;
+                else imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                worksEl.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--accent)">Страница на Википедии →</a>';
+                slide.dataset.loaded = '1';
+            } catch(err){
+                bioEl.textContent = 'Биография недоступна — проверьте соединение или откройте страницу автора на Википедии.';
+                imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                worksEl.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--accent)">Открыть в Википедии</a>';
+                slide.dataset.loaded = '1';
+            }
+        }
+
+        // Инициализация: загрузка первого слайда и предзагрузка ближайших
+        show(0);
+        // Предзагрузить обложки для следующих 2 слайдов (если они авторские)
+        setTimeout(()=>{ maybeLoadWiki(slides[4]); maybeLoadWiki(slides[5]); },500);
+    </script>
 </body>
 </html>
