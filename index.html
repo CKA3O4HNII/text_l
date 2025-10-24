@@ -5,125 +5,309 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
     <title>Символизм в русской литературе</title>
-        <style>
-            /* Чёрно-белый минимализм */
-            :root{ --bg:#000; --fg:#ffffff; --muted:#a8a8a8; --accent:#ffffff }
-        html,body{height:100%;}
-            body{margin:0;font-family: Inter, Arial, Helvetica, sans-serif;background:#000;color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-            .deck{position:relative;max-width:1100px;margin:20px auto;min-height:72vh}
-        .slide{position:absolute;inset:0;padding:48px;border-radius:12px;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;opacity:0;transform:translateX(30px) scale(.995);transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .45s ease;backface-visibility:hidden}
-        .slide.active{opacity:1;transform:translateX(0) scale(1);z-index:2}
-        h1{font-size:2.2rem;margin:0 0 8px 0;letter-spacing:.6px}
-        h2{font-size:1.15rem;margin:0 0 6px 0;color:var(--accent)}
-        p{color:var(--muted);line-height:1.45;margin:0 0 12px 0}
-        .lead{font-size:1.05rem;color:#dfe7ff}
-        .controls{position:fixed;right:24px;bottom:24px;display:flex;gap:8px;align-items:center}
-        .btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--fg);padding:10px 12px;border-radius:8px;cursor:pointer}
-        .progress{height:6px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;width:220px}
-        .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#66f6ff);width:0%;transition:width .4s ease}
-        .meta{position:absolute;left:48px;bottom:28px;color:var(--muted);font-size:0.9rem}
-            .author-figure{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
-            .author-card{width:calc(20% - 12px);min-width:150px;background:transparent;padding:10px;border-radius:8px}
-            .author-card img{width:100%;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.06)}
-            .author-card h3{margin:8px 0 6px 0;font-size:1rem}
-            .author-card p{font-size:0.85rem;color:var(--muted)}
-        .works{margin-top:10px;color:#cfe9ff}
-        .quote{font-style:italic;color:#fff;margin-top:10px}
-        .note{font-size:0.85rem;color:var(--muted);margin-top:12px}
-        @media (max-width:900px){.author-figure img{width:120px;height:120px}.deck{padding:24px;margin:20px}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Тёмная тема с минимализмом */
+        :root {
+            --bg: #000;
+            --fg: #ffffff;
+            --muted: #a8a8a8;
+            --accent: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        html, body { height: 100%; margin: 0; overflow: hidden; font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .deck { position: relative; max-width: 1100px; margin: 20px auto; min-height: 72vh; }
+        .slide { position: absolute; inset: 0; padding: 48px; border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; opacity: 0; transform: translateX(30px) scale(0.995); transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.45s ease; backface-visibility: hidden; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; transform: translateX(0) scale(1); z-index: 2; }
+        h1 { font-size: 2.5rem; margin: 0 0 12px 0; letter-spacing: 0.8px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); }
+        h2 { font-size: 1.5rem; margin: 0 0 8px 0; color: var(--accent); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+        p { color: var(--muted); line-height: 1.5; margin: 0 0 12px 0; font-size: 1rem; }
+        .lead { font-size: 1.2rem; color: #dfe7ff; }
+        .controls { position: fixed; right: 24px; bottom: 24px; display: flex; gap: 8px; align-items: center; }
+        .btn { background: transparent; border: 1px solid rgba(255, 255, 255, 0.08); color: var(--fg); padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); }
+        .progress { height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; width: 220px; }
+        .progress > i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #66f6ff); width: 0%; transition: width 0.4s ease; }
+        .note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
+        .quote { font-style: italic; color: #fff; margin-top: 10px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+
+        /* Авторские карточки */
+        .authors-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; width: 100%; }
+        .author-card { width: calc(25% - 20px); min-width: 180px; background: var(--card-bg); padding: 16px; border-radius: 8px; box-shadow: var(--shadow); text-align: center; }
+        .author-card img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; margin-bottom: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .author-card h3 { margin: 0 0 6px 0; font-size: 1.1rem; }
+        .author-card p { font-size: 0.9rem; color: var(--muted); }
+
+        /* Карточки для черт и определений */
+        .cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; width: 100%; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); width: calc(33% - 20px); text-align: center; }
+        .card .icon { font-size: 2rem; margin-bottom: 10px; }
+        .card h3 { font-size: 1.2rem; margin: 0 0 8px 0; }
+        .card p { font-size: 0.95rem; color: var(--muted); }
+
+        /* Таймлайн */
+        .timeline { width: 100%; position: relative; margin: 20px 0; }
+        .timeline-line { height: 2px; background: var(--muted); position: absolute; top: 50%; left: 0; right: 0; }
+        .event { position: relative; text-align: center; margin: 0 10%; }
+        .event-number { background: var(--accent); color: var(--bg); width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px; }
+        .event-year { font-size: 1.2rem; margin-bottom: 5px; }
+        .event-desc { font-size: 1rem; color: var(--muted); }
+
+        /* Наследие: круги */
+        .charts { display: flex; gap: 40px; justify-content: center; margin: 20px 0; }
+        .chart { text-align: center; }
+        .circle { width: 100px; height: 100px; border-radius: 50%; border: 10px solid var(--accent); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; }
+        .partial { border-color: var(--accent) transparent transparent var(--accent); border-width: 10px; transform: rotate(45deg); } /* Пример для 20% */
+
+        /* Анимация падающих звезд */
+        body::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: -1; }
+        .star { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: fall 10s linear infinite; opacity: 0.8; }
+        @keyframes fall { 0% { transform: translateY(-100vh) rotate(45deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(45deg); opacity: 0; } }
+        /* Генерация звезд в JS */
+
+        /* Загрузка */
+        #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--muted); z-index: 10; }
+
+        /* Фоновые изображения для слайдов */
+        .slide[data-index="0"] { background-image: url('https://images.stockcake.com/public/8/f/7/8f775899-9130-4ade-ba4c-8a9aeffade3b_large/books-grow-knowledge-stockcake.jpg'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+        .slide[data-index="2"] { background-image: url('https://www.shutterstock.com/image-illustration/hand-drawn-watercolor-painting-sunset-260nw-2569515233.jpg'); }
+        .slide[data-index="4"] { background-image: url('https://thumbs.dreamstime.com/b/watercolor-misty-landscape-mountain-fog-birds-flying-sky-traditional-oriental-ink-asia-art-style-watercolor-painting-184572208.jpg'); }
+        .slide[data-index="9"] { background-image: url('https://www.shutterstock.com/image-vector/line-drawing-floral-book-set-600nw-2502448635.jpg'); background-size: contain; background-position: right bottom; }
+
+        /* Медиа-запросы */
+        @media (max-width: 900px) { .author-card { width: calc(50% - 12px); } .card { width: 100%; } .deck { padding: 24px; margin: 20px; } }
     </style>
 </head>
 <body>
+    <div id="loading">Загрузка...</div>
     <div class="deck" id="deck">
-        <!-- Слайды -->
+        <!-- Слайды по PDF -->
         <section class="slide active" data-index="0">
             <h1>Символизм в русской литературе</h1>
-            <div class="lead">Введение — ключевые идеи, этапы и авторы символизма (конец XIX — начало XX века)</div>
+            <h2>Старший и младший символизм: от возникновения до упадка</h2>
             <div class="quote">«Искусство — это храм, в котором мы ищем смыслы»</div>
             <div class="note">Управление: ПКМ / Пробел / ↑ — вперед, ← — назад</div>
         </section>
 
         <section class="slide" data-index="1">
-            <h2>Предпосылки возникновения</h2>
-            <p>Кризис позитивизма, интерес к мистицизму, влияние Бодлера и французских символистов, духовный поиск интеллигенции и социальные изменения создали почву для символизма.</p>
+            <h1>Что такое символизм?</h1>
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">🔤</div>
+                    <h3>Язык символов</h3>
+                    <p>Поэтическое течение, где символ становится мостом между видимым и невидимым, материальным и духовным мирами</p>
+                </div>
+                <div class="card">
+                    <div class="icon">💬</div>
+                    <h3>Метафора реальности</h3>
+                    <p>Отказ от прямого описания в пользу намёка, многозначности, музыкальности слова</p>
+                </div>
+                <div class="card">
+                    <div class="icon">💡</div>
+                    <h3>Интуиция превыше всего</h3>
+                    <p>Познание мира через чувственное восприятие и мистический опыт, а не рациональный анализ</p>
+                </div>
+            </div>
+            <p>Символизм провозгласил новую эстетику: красота и тайна важнее обыденной правды. Это был бунт против позитивизма и реализма XIX века.</p>
         </section>
 
         <section class="slide" data-index="2">
-            <h2>Старший символизм (1890-е — начало 1900-х)</h2>
-            <p class="lead">Декаданс, меланхолия, мистицизм. Символы природы и города, темы смерти и красоты.</p>
-            <div class="works">Ключевые фигуры: Валерий Брюсов, Константин Бальмонт, Зинаида Гиппиус, Дмитрий Мережковский</div>
+            <h1>Истоки и предпосылки</h1>
+            <div style="display: flex; width: 100%; gap: 20px;">
+                <div style="width: 50%;">
+                    <h2>Европейское влияние</h2>
+                    <p>Французский символизм Бодлера, Верлена, Рембо стал образцом для русских поэтов. Идеи «чистого искусства» и эстетизма проникли в Россию через переводы и личные контакты.</p>
+                    <ul>
+                        <li>Шарль Бодлер — теория соответствий</li>
+                        <li>Поль Верлен — музыкальность стиха</li>
+                        <li>Артюр Рембо — визионерская поэзия</li>
+                    </ul>
+                </div>
+                <div style="width: 50%;">
+                    <h2>Философские основы</h2>
+                    <p>Ницшеанство с культом сверхчеловека, теософия Блаватской, идеи Владимира Соловьёва о Софии и Вечной Женственности питали символистскую мысль.</p>
+                    <ul>
+                        <li>Фридрих Ницше — переоценка ценностей</li>
+                        <li>Владимир Соловьёв — философия всеединства</li>
+                        <li>Елена Блаватская — эзотерические учения</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <section class="slide" data-index="3">
-            <h2>Младший символизм (начало 1900-х)</h2>
-            <p class="lead">Теософия, мистический оптимизм, синтез искусств — театр, музыка и поэзия.</p>
-            <div class="works">Ключевые фигуры: Александр Блок, Андрей Белый, Вячеслав Иванов</div>
-        </section>
-
-            <!-- Группированные авторы (по 5 на слайд) -->
-            <section class="slide" data-index="4">
-                <div class="author-figure authors-grid">
-                    <div class="author-card" data-title="Валерий Брюсов">
-                        <img alt="photo" src="" />
-                        <h3>Валерий Брюсов</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
+            <h1>Рождение старшего символизма</h1>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="event">
+                        <div class="event-number">1</div>
+                        <div class="event-year">1892</div>
+                        <div class="event-desc">Дмитрий Мережковский публикует лекцию «О причинах упадка и о новых течениях современной русской литературы» — первый манифест русского символизма</div>
                     </div>
-                    <div class="author-card" data-title="Константин Бальмонт">
-                        <img alt="photo" src="" />
-                        <h3>Константин Бальмонт</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
+                    <div class="event">
+                        <div class="event-number">2</div>
+                        <div class="event-year">1894</div>
+                        <div class="event-desc">Выходят первые сборники Валерия Брюсова «Chefs d’œuvre» и «Me eum esse» — скандальные, но знаковые</div>
                     </div>
-                    <div class="author-card" data-title="Зинаида Гиппиус">
-                        <img alt="photo" src="" />
-                        <h3>Зинаида Гиппиус</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
-                    </div>
-                    <div class="author-card" data-title="Дмитрий Мережковский">
-                        <img alt="photo" src="" />
-                        <h3>Дмитрий Мережковский</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
-                    </div>
-                    <div class="author-card" data-title="Александр Блок">
-                        <img alt="photo" src="" />
-                        <h3>Александр Блок</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
+                    <div class="event">
+                        <div class="event-number">3</div>
+                        <div class="event-year">1895-1899</div>
+                        <div class="event-desc">Формирование кружков символистов в Москве и Петербурге, издание альманахов «Северные цветы» и журнала «Мир искусства»</div>
                     </div>
                 </div>
-            </section>
+            </div>
+            <p>1890-е годы стали временем брожения идей. Молодые поэты искали новые формы выражения, отвергая «тенденциозность» народников и натурализм.</p>
+        </section>
 
-            <section class="slide" data-index="5">
-                <div class="author-figure authors-grid">
-                    <div class="author-card" data-title="Андрей Белый">
-                        <img alt="photo" src="" />
-                        <h3>Андрей Белый</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
+        <section class="slide" data-index="4">
+            <h1>Черты старшего символизма</h1>
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">💀</div>
+                    <h3>Декадентство</h3>
+                    <p>Культ изысканности, утончённости, болезненной красоты. Темы смерти, увядания, упадка цивилизации пронизывают поэзию.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">👤</div>
+                    <h3>Индивидуализм</h3>
+                    <p>Поэт — жрец искусства, одиночка, противопоставленный толпе. Эстетизм как форма самоутверждения.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">✨</div>
+                    <h3>Мистические мотивы</h3>
+                    <p>Интерес к оккультизму, древним религиям, мистическому опыту. Символы: звезда, луна, сумерки, туман.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="5">
+            <h1>Мастера старшего символизма</h1>
+            <div class="authors-grid">
+                <div class="author-card" data-title="Валерий Брюсов">
+                    <img alt="Портрет Валерия Брюсова" src="" />
+                    <h3>Валерий Брюсов</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Я люблю большие дома...», «Творчество» — виртуоз формы, теоретик символизма, редактор журнала «Весы»</p>
+                </div>
+                <div class="author-card" data-title="Константин Бальмонт">
+                    <img alt="Портрет Константина Бальмонта" src="" />
+                    <h3>Константин Бальмонт</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Будем как солнце», «Только любовь» — поэт стихий, импрессионист слова, мастер звукописи</p>
+                </div>
+                <div class="author-card" data-title="Зинаида Гиппиус">
+                    <img alt="Портрет Зинаиды Гиппиус" src="" />
+                    <h3>Зинаида Гиппиус</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Песня», «Она» — острая, парадоксальная лирика, религиозные искания, салон Мережковских</p>
+                </div>
+                <div class="author-card" data-title="Дмитрий Мережковский">
+                    <img alt="Портрет Дмитрия Мережковского" src="" />
+                    <h3>Дмитрий Мережковский</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">Трилогия «Христос и Антихрист» — философская проза, синтез язычества и христианства</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-index="6">
+            <h1>Младшие символисты: новое поколение</h1>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="event">
+                        <div class="event-number">1</div>
+                        <div class="event-year">1900-1904</div>
+                        <div class="event-desc">Кризис декадентства, поиски религиозного смысла искусства</div>
                     </div>
-                    <div class="author-card" data-title="Вячеслав Иванов">
-                        <img alt="photo" src="" />
-                        <h3>Вячеслав Иванов</h3>
-                        <p class="bio">Загрузка...</p>
-                        <p class="work-link"></p>
+                    <div class="event">
+                        <div class="event-number">2</div>
+                        <div class="event-year">От эстетизма к теургии</div>
+                        <div class="event-desc">Искусство как преображение мира, жизнетворчество, соборность</div>
+                    </div>
+                    <div class="event">
+                        <div class="event-number">3</div>
+                        <div class="event-year">Динамика и синтез</div>
+                        <div class="event-desc">Больше внимания к ритму, динамике образов, синтезу искусств</div>
                     </div>
                 </div>
-            </section>
-
-        <section class="slide" data-index="11">
-            <h2>Упадок символизма (около 1910)</h2>
-            <p class="lead">Причины: элитарность, отрыв от жизни, исторические перемены и появление новых движений — акмеизма и футуризма.</p>
+            </div>
+            <p>Младосимволисты отошли от индивидуализма «старших». Вдохновлённые идеями Владимира Соловьёва, они видели в поэзии путь к духовному преображению человечества. Революция 1905 года всколыхнула общество. Поэты откликнулись на социальные потрясения, но не отказались от мистических прозрений.</p>
         </section>
 
-        <section class="slide" data-index="12">
-            <h2>Заключение</h2>
-            <p>Символизм предложил новые способы выражения через символы и метафоры. Он подготовил почву для следующих авангардных и нео-классических течений.</p>
-            <p class="note">Все биографии и фотографии получены через API Википедии (ru.wikipedia.org). Цитаты и произведения — выбирались из открытых источников (вики-страницы авторов).</p>
+        <section class="slide" data-index="7">
+            <h1>Вершины младшего символизма</h1>
+            <div class="authors-grid">
+                <div class="author-card" data-title="Александр Блок">
+                    <img alt="Портрет Александра Блока" src="" />
+                    <h3>Александр Блок</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Стихи о Прекрасной Даме», «Двенадцать», поэма «Возмездие» • Культ Вечной Женственности • Трагедия поэта между идеалом и реальностью • Музыкальность и философская глубина</p>
+                </div>
+                <div class="author-card" data-title="Андрей Белый">
+                    <img alt="Портрет Андрея Белого" src="" />
+                    <h3>Андрей Белый</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Золото в лазури», роман «Петербург», «Симфонии» • Эксперименты с ритмом и формой • Философия антропософии • Синтез поэзии и прозы</p>
+                </div>
+                <div class="author-card" data-title="Вячеслав Иванов">
+                    <img alt="Портрет Вячеслава Иванова" src="" />
+                    <h3>Вячеслав Иванов</h3>
+                    <p class="bio">Загрузка...</p>
+                    <p class="work-link">«Кормчие звёзды», «Прозрачность», теория соборного театра • Дионисийские мотивы • Архаизация языка • Культ античности и христианства</p>
+                </div>
+            </div>
         </section>
 
+        <section class="slide" data-index="8">
+            <h1>Закат символизма</h1>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="event">
+                        <div class="event-number">1</div>
+                        <div class="event-year">1910: «Кризис символизма»</div>
+                        <div class="event-desc">Статья Андрея Белого фиксирует внутренний раскол. Младосимволисты разочаровываются в теургических идеях.</div>
+                    </div>
+                    <div class="event">
+                        <div class="event-number">2</div>
+                        <div class="event-year">Новые течения</div>
+                        <div class="event-desc">Акмеисты (Гумилёв, Ахматова) провозглашают «возврат к материи». Футуристы (Маяковский, Хлебников) атакуют «эстетизм прошлого».</div>
+                    </div>
+                    <div class="event">
+                        <div class="event-number">3</div>
+                        <div class="event-year">Историческая развилка</div>
+                        <div class="event-desc">Первая мировая война и революция 1917 года разрушают культурный мир символизма. Многие уезжают в эмиграцию.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="quote">«Символизм закончился. Он закончился потому, что исчерпал себя.» — Николай Гумилёв, 1913</div>
+        </section>
+
+        <section class="slide" data-index="9">
+            <h1>Наследие символизма</h1>
+            <div class="charts">
+                <div class="chart">
+                    <div class="circle partial">20+</div>
+                    <p>лет влияния на русскую культуру Серебряного века</p>
+                </div>
+                <div class="chart">
+                    <div class="circle">100%</div>
+                    <p>преображение поэтического языка и формы</p>
+                </div>
+            </div>
+            <h2>Ключевые выводы</h2>
+            <ul>
+                <li>Символизм открыл новые горизонты в русской поэзии, освободив слово от прямолинейности</li>
+                <li>Старший и младший символизм представляли разные философские программы, но единую эстетическую революцию</li>
+                <li>Влияние символизма прослеживается в творчестве Пастернака, Цветаевой, Мандельштама</li>
+                <li>Символистская традиция продолжает жить в современной поэзии</li>
+            </ul>
+            <h2>Основные источники</h2>
+            <p>Минц З.Г. «Поэтика русского символизма»; Гинзбург Л. «О лирике»; Пайман А. «История русского символизма»; Ханзен-Лёве О. «Русский символизм»</p>
+        </section>
     </div>
 
     <div class="controls" aria-hidden>
@@ -132,83 +316,93 @@
         <button class="btn" id="next">Вперёд →</button>
     </div>
 
-        <script>
-        // Презентация: навигация, анимации и предварительная подгрузка биографий с Википедии
+    <script>
+        // Навигация и загрузка
         const slides = Array.from(document.querySelectorAll('.slide'));
         let idx = 0;
 
-        function show(i){
-            if(i<0) i=0;
-            if(i>=slides.length) i=slides.length-1;
-            slides.forEach(s=>s.classList.remove('active'));
+        function show(i) {
+            if (i < 0) i = 0;
+            if (i >= slides.length) i = slides.length - 1;
+            slides.forEach(s => s.classList.remove('active'));
             slides[i].classList.add('active');
             idx = i;
             updateProgress();
         }
 
-        function next(){ if(idx < slides.length-1) show(idx+1); }
-        function prev(){ if(idx > 0) show(idx-1); }
+        function next() { if (idx < slides.length - 1) show(idx + 1); }
+        function prev() { if (idx > 0) show(idx - 1); }
 
-        document.getElementById('next').addEventListener('click', ()=> next());
-        document.getElementById('prev').addEventListener('click', ()=> prev());
+        document.getElementById('next').addEventListener('click', next);
+        document.getElementById('prev').addEventListener('click', prev);
 
-        // Клавиши и ПКМ: пространство и стрелка вверх = вперед; стрелка влево = назад
-        document.addEventListener('keydown', (e)=>{
-            if(e.code === 'Space' || e.code === 'ArrowUp'){ e.preventDefault(); next(); }
-            else if(e.code === 'ArrowLeft' || e.code === 'ArrowDown'){ e.preventDefault(); prev(); }
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowRight') { e.preventDefault(); next(); }
+            else if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') { e.preventDefault(); prev(); }
         });
 
-        // ПКМ — использовать для перехода вперёд (отменяем контекстное меню)
-        document.addEventListener('contextmenu', (e)=>{ e.preventDefault(); next(); });
+        document.addEventListener('contextmenu', (e) => { e.preventDefault(); next(); });
 
-        function updateProgress(){
-            const p = Math.round((idx+1)/slides.length*100);
+        function updateProgress() {
+            const p = Math.round((idx + 1) / slides.length * 100);
             document.getElementById('prog').style.width = p + '%';
         }
 
-        // Список авторов для загрузки
+        // Авторы
         const authors = [
             'Валерий Брюсов', 'Константин Бальмонт', 'Зинаида Гиппиус',
             'Дмитрий Мережковский', 'Александр Блок', 'Андрей Белый', 'Вячеслав Иванов'
         ];
 
-        // Загрузить все краткие страницы из Википедии при инициализации
-        async function loadAllWiki(){
+        async function loadAllWiki() {
             const promises = authors.map(title =>
                 fetch('https://ru.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title))
                     .then(r => r.ok ? r.json() : Promise.reject(r))
-                    .catch(()=>null)
+                    .catch(() => null)
             );
             const results = await Promise.all(promises);
             const map = {};
-            results.forEach((data, i)=>{
-                if(data) map[authors[i]] = data;
+            results.forEach((data, i) => {
+                if (data) map[authors[i]] = data;
             });
 
-            // Заполнить все author-card
-            document.querySelectorAll('.author-card').forEach(card=>{
+            document.querySelectorAll('.author-card').forEach(card => {
                 const title = card.dataset.title;
                 const data = map[title];
                 const img = card.querySelector('img');
                 const bio = card.querySelector('.bio');
-                const link = card.querySelector('.work-link');
-                if(data){
-                    bio.textContent = data.extract ? data.extract : (data.description || '');
-                    if(data.thumbnail && data.thumbnail.source) img.src = data.thumbnail.source;
+                if (data) {
+                    bio.textContent = data.extract ? data.extract.slice(0, 150) + '...' : (data.description || '');
+                    if (data.thumbnail && data.thumbnail.source) img.src = data.thumbnail.source.replace('thumb/', '').split('/').slice(0, -1).join('/'); // Полный размер
                     else img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
-                    link.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--fg)">Страница на Википедии →</a>';
                 } else {
                     bio.textContent = 'Биография недоступна.';
                     img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
-                    link.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--fg)">Открыть в Википедии</a>';
                 }
             });
         }
 
-        // Инициализация: загрузка данных и показ первого слайда
-        (async function(){
-            try{ await loadAllWiki(); }
-            catch(e){ console.warn('Не удалось загрузить данные Википедии', e); }
+        // Анимация звезд
+        function createStars() {
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 10 + 's';
+                star.style.animationDuration = Math.random() * 5 + 5 + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        // Инициализация
+        (async function() {
+            try {
+                await loadAllWiki();
+            } catch (e) {
+                console.warn('Не удалось загрузить данные Википедии', e);
+            }
+            document.getElementById('loading').style.display = 'none';
+            createStars();
             show(0);
         })();
     </script>
