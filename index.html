@@ -351,7 +351,8 @@
                 if (data) map[authors[i]] = data;
             });
 
-            document.querySelectorAll('.author-card').forEach(card => {
+            // Пройтись по каждой карточке и заполнить из map; при отсутствии thumbnail делать дополнительный запрос media-list
+            for (const card of document.querySelectorAll('.author-card')) {
                 const title = card.dataset.title;
                 const data = map[title];
                 const img = card.querySelector('img');
@@ -359,14 +360,34 @@
                 if (data) {
                     const text = data.extract ? data.extract : (data.description || '');
                     bio.textContent = text.length > 220 ? text.slice(0, 220).replace(/\s\S*$/, '...') : text;
-                    if (data.thumbnail && data.thumbnail.source) img.src = data.thumbnail.source;
-                    else img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                    // если есть thumbnail — используем, иначе пробуем media-list
+                    if (data.thumbnail && data.thumbnail.source) {
+                        img.src = data.thumbnail.source;
+                    } else {
+                        // попытка получить изображение из media-list
+                        try {
+                            const mres = await fetch('https://ru.wikipedia.org/api/rest_v1/page/media-list/' + encodeURIComponent(title));
+                            if (mres.ok) {
+                                const mjson = await mres.json();
+                                if (mjson && Array.isArray(mjson.items) && mjson.items.length) {
+                                    // найти первый элемент типа image с srcset или src
+                                    const imgItem = mjson.items.find(it => it.type === 'image' && (it.srcset || it.src));
+                                    if (imgItem) {
+                                        img.src = (imgItem.srcset && imgItem.srcset.length) ? imgItem.srcset[imgItem.srcset.length-1].src : (imgItem.src || imgItem.url || '');
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            // ignore
+                        }
+                        if (!img.src) img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                    }
                     img.alt = title + ' — портрет';
                 } else {
                     bio.textContent = 'Биография недоступна.';
                     img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
                 }
-            });
+            }
         }
 
         // Анимация звезд
