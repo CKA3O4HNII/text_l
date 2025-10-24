@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
     <title>Символизм в русской литературе</title>
-    <style>
-        /* Чёрный минимализм */
-        :root{ --bg:#000; --fg:#eef2ff; --muted:#9aa3b2; --accent:#69d2ff }
+        <style>
+            /* Чёрно-белый минимализм */
+            :root{ --bg:#000; --fg:#ffffff; --muted:#a8a8a8; --accent:#ffffff }
         html,body{height:100%;}
-        body{margin:0;font-family: Inter, Arial, Helvetica, sans-serif;background:linear-gradient(180deg,#000 0%, #070707 100%);color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-        .deck{position:relative;max-width:1100px;margin:40px auto;min-height:68vh}
+            body{margin:0;font-family: Inter, Arial, Helvetica, sans-serif;background:#000;color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+            .deck{position:relative;max-width:1100px;margin:20px auto;min-height:72vh}
         .slide{position:absolute;inset:0;padding:48px;border-radius:12px;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;opacity:0;transform:translateX(30px) scale(.995);transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .45s ease;backface-visibility:hidden}
         .slide.active{opacity:1;transform:translateX(0) scale(1);z-index:2}
         h1{font-size:2.2rem;margin:0 0 8px 0;letter-spacing:.6px}
@@ -22,8 +22,11 @@
         .progress{height:6px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;width:220px}
         .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#66f6ff);width:0%;transition:width .4s ease}
         .meta{position:absolute;left:48px;bottom:28px;color:var(--muted);font-size:0.9rem}
-        .author-figure{display:flex;gap:20px;align-items:center}
-        .author-figure img{width:180px;height:180px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.06)}
+            .author-figure{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+            .author-card{width:calc(20% - 12px);min-width:150px;background:transparent;padding:10px;border-radius:8px}
+            .author-card img{width:100%;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.06)}
+            .author-card h3{margin:8px 0 6px 0;font-size:1rem}
+            .author-card p{font-size:0.85rem;color:var(--muted)}
         .works{margin-top:10px;color:#cfe9ff}
         .quote{font-style:italic;color:#fff;margin-top:10px}
         .note{font-size:0.85rem;color:var(--muted);margin-top:12px}
@@ -57,83 +60,58 @@
             <div class="works">Ключевые фигуры: Александр Блок, Андрей Белый, Вячеслав Иванов</div>
         </section>
 
-        <!-- Авторы — будут подгружаться из Википедии -->
-        <section class="slide" data-index="4" data-wiki="Валерий Брюсов">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Валерий Брюсов</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
+            <!-- Группированные авторы (по 5 на слайд) -->
+            <section class="slide" data-index="4">
+                <div class="author-figure authors-grid">
+                    <div class="author-card" data-title="Валерий Брюсов">
+                        <img alt="photo" src="" />
+                        <h3>Валерий Брюсов</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
+                    <div class="author-card" data-title="Константин Бальмонт">
+                        <img alt="photo" src="" />
+                        <h3>Константин Бальмонт</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
+                    <div class="author-card" data-title="Зинаида Гиппиус">
+                        <img alt="photo" src="" />
+                        <h3>Зинаида Гиппиус</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
+                    <div class="author-card" data-title="Дмитрий Мережковский">
+                        <img alt="photo" src="" />
+                        <h3>Дмитрий Мережковский</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
+                    <div class="author-card" data-title="Александр Блок">
+                        <img alt="photo" src="" />
+                        <h3>Александр Блок</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="slide" data-index="5" data-wiki="Константин Бальмонт">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Константин Бальмонт</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
+            <section class="slide" data-index="5">
+                <div class="author-figure authors-grid">
+                    <div class="author-card" data-title="Андрей Белый">
+                        <img alt="photo" src="" />
+                        <h3>Андрей Белый</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
+                    <div class="author-card" data-title="Вячеслав Иванов">
+                        <img alt="photo" src="" />
+                        <h3>Вячеслав Иванов</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link"></p>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="slide" data-index="6" data-wiki="Зинаида Гиппиус">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Зинаида Гиппиус</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" data-index="7" data-wiki="Дмитрий Мережковский">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Дмитрий Мережковский</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" data-index="8" data-wiki="Александр Блок">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Александр Блок</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" data-index="9" data-wiki="Андрей Белый">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Андрей Белый</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" data-index="10" data-wiki="Вячеслав Иванов">
-            <div class="author-figure">
-                <img alt="photo" src="" class="author-photo" />
-                <div>
-                    <h2>Вячеслав Иванов</h2>
-                    <p class="meta author-bio">Загрузка биографии...</p>
-                    <div class="works author-works"></div>
-                </div>
-            </div>
-        </section>
+            </section>
 
         <section class="slide" data-index="11">
             <h2>Упадок символизма (около 1910)</h2>
@@ -154,8 +132,8 @@
         <button class="btn" id="next">Вперёд →</button>
     </div>
 
-    <script>
-        // Презентация: навигация, анимации и динамическая подгрузка биографий с Википедии
+        <script>
+        // Презентация: навигация, анимации и предварительная подгрузка биографий с Википедии
         const slides = Array.from(document.querySelectorAll('.slide'));
         let idx = 0;
 
@@ -166,7 +144,6 @@
             slides[i].classList.add('active');
             idx = i;
             updateProgress();
-            maybeLoadWiki(slides[i]);
         }
 
         function next(){ if(idx < slides.length-1) show(idx+1); }
@@ -189,35 +166,51 @@
             document.getElementById('prog').style.width = p + '%';
         }
 
-        // Подгрузка биографии и фото автора через REST API Википедии (ru)
-        async function maybeLoadWiki(slide){
-            const title = slide.dataset.wiki;
-            if(!title) return;
-            if(slide.dataset.loaded) return;
-            const bioEl = slide.querySelector('.author-bio');
-            const imgEl = slide.querySelector('.author-photo');
-            const worksEl = slide.querySelector('.author-works');
-            try{
-                const res = await fetch('https://ru.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title));
-                if(!res.ok) throw new Error('no wiki');
-                const data = await res.json();
-                bioEl.textContent = data.extract ? data.extract : (data.description || '—');
-                if(data.thumbnail && data.thumbnail.source) imgEl.src = data.thumbnail.source;
-                else imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
-                worksEl.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--accent)">Страница на Википедии →</a>';
-                slide.dataset.loaded = '1';
-            } catch(err){
-                bioEl.textContent = 'Биография недоступна — проверьте соединение или откройте страницу автора на Википедии.';
-                imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
-                worksEl.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--accent)">Открыть в Википедии</a>';
-                slide.dataset.loaded = '1';
-            }
+        // Список авторов для загрузки
+        const authors = [
+            'Валерий Брюсов', 'Константин Бальмонт', 'Зинаида Гиппиус',
+            'Дмитрий Мережковский', 'Александр Блок', 'Андрей Белый', 'Вячеслав Иванов'
+        ];
+
+        // Загрузить все краткие страницы из Википедии при инициализации
+        async function loadAllWiki(){
+            const promises = authors.map(title =>
+                fetch('https://ru.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title))
+                    .then(r => r.ok ? r.json() : Promise.reject(r))
+                    .catch(()=>null)
+            );
+            const results = await Promise.all(promises);
+            const map = {};
+            results.forEach((data, i)=>{
+                if(data) map[authors[i]] = data;
+            });
+
+            // Заполнить все author-card
+            document.querySelectorAll('.author-card').forEach(card=>{
+                const title = card.dataset.title;
+                const data = map[title];
+                const img = card.querySelector('img');
+                const bio = card.querySelector('.bio');
+                const link = card.querySelector('.work-link');
+                if(data){
+                    bio.textContent = data.extract ? data.extract : (data.description || '');
+                    if(data.thumbnail && data.thumbnail.source) img.src = data.thumbnail.source;
+                    else img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                    link.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--fg)">Страница на Википедии →</a>';
+                } else {
+                    bio.textContent = 'Биография недоступна.';
+                    img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
+                    link.innerHTML = '<a href="https://ru.wikipedia.org/wiki/' + encodeURIComponent(title) + '" target="_blank" style="color:var(--fg)">Открыть в Википедии</a>';
+                }
+            });
         }
 
-        // Инициализация: загрузка первого слайда и предзагрузка ближайших
-        show(0);
-        // Предзагрузить обложки для следующих 2 слайдов (если они авторские)
-        setTimeout(()=>{ maybeLoadWiki(slides[4]); maybeLoadWiki(slides[5]); },500);
+        // Инициализация: загрузка данных и показ первого слайда
+        (async function(){
+            try{ await loadAllWiki(); }
+            catch(e){ console.warn('Не удалось загрузить данные Википедии', e); }
+            show(0);
+        })();
     </script>
 </body>
 </html>
