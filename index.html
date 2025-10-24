@@ -19,7 +19,7 @@
     html, body { height: 100%; margin: 0; overflow: auto; font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     /* Внешний отступ небольшой — основной сдвиг делаем через внутренний padding слайда */
     .deck { position: relative; max-width: 1100px; margin: 20px auto; min-height: 72vh; }
-    .slide { position: absolute; inset: 0; padding: 96px 48px 48px; border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; opacity: 0; transform: translateX(30px) scale(0.995); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.35s ease; backface-visibility: hidden; background-size: cover; background-position: center; overflow: hidden; }
+    .slide { position: absolute; inset: 0; padding: 96px 48px 80px; border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; opacity: 0; transform: translateX(30px) scale(0.995); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.35s ease; backface-visibility: hidden; background-size: cover; background-position: center; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)); border-radius: 12px; z-index: 1; pointer-events: none; }
     .slide > * { position: relative; z-index: 2; }
     .slide.active { opacity: 1; transform: translateX(0) scale(1); z-index: 2; }
@@ -82,7 +82,7 @@
         .slide[data-index="9"] { background-image: url('https://www.shutterstock.com/image-vector/line-drawing-floral-book-set-600nw-2502448635.jpg'); background-size: contain; background-position: right bottom; }
 
         /* Медиа-запросы */
-    @media (max-width: 900px) { .author-card { width: auto; } .card { width: 100%; } .deck { padding: 24px; margin: 16px; } .slide { padding: 64px 20px 32px; } h1{font-size:1.6rem} h2{font-size:1rem} p{font-size:0.95rem} }
+    @media (max-width: 900px) { .author-card { width: auto; } .card { width: 100%; } .deck { padding: 24px; margin: 16px; } .slide { padding: 64px 20px 64px; } h1{font-size:1.6rem} h2{font-size:1rem} p{font-size:0.95rem} }
     </style>
 </head>
 <body>
