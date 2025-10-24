@@ -6,28 +6,35 @@
     <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
     <title>Символизм в русской литературе</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Тёмная тема с минимализмом */
+        /* Новый визуальный стиль — мистический градиент, типографика PT Serif + Inter */
         :root {
-            --bg: #000;
-            --fg: #ffffff;
-            --muted: #a8a8a8;
-            --accent: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --bg-start: #2c1810; /* тёмно-коричневый */
+            --bg-end: #1a0d2e; /* тёмно-фиолетовый */
+            --fg: #e0e0e0; /* светло-серый */
+            --muted: #bdbdbd;
+            --accent: #7a5a4a; /* тёплый акцент */
+            --card-bg: rgba(255,255,255,0.03);
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --max-width: 800px;
         }
-    html, body { height: 100%; margin: 0; overflow: auto; font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'PT Serif', Georgia, serif; background: linear-gradient(to bottom, var(--bg-start), var(--bg-end)); color: var(--fg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     /* Внешний отступ небольшой — основной сдвиг делаем через внутренний padding слайда */
     .deck { position: relative; max-width: 1100px; margin: 20px auto; min-height: 72vh; }
     .slide { position: absolute; inset: 0; padding: 96px 48px 80px; border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; opacity: 0; transform: translateX(30px) scale(0.995); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.35s ease; backface-visibility: hidden; background-size: cover; background-position: center; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)); border-radius: 12px; z-index: 1; pointer-events: none; }
     .slide > * { position: relative; z-index: 2; }
     .slide.active { opacity: 1; transform: translateX(0) scale(1); z-index: 2; }
-    h1 { font-size: 2.2rem; margin: 0 0 12px 0; letter-spacing: 0.6px; font-weight:700; }
-    h2 { font-size: 1.25rem; margin: 0 0 8px 0; color: var(--accent); }
-    p { color: #e6e6e6; line-height: 1.55; margin: 0 0 12px 0; font-size: 1rem; max-width: 70ch; }
-    .lead { font-size: 1.1rem; color: #f3f6fb; }
-        .controls { position: fixed; right: 24px; bottom: 24px; display: flex; gap: 8px; align-items: center; }
+    /* Типографика */
+    h1 { font-family: 'Inter', Arial, sans-serif; font-size: 36px; margin: 0 0 30px 0; letter-spacing: 0.6px; font-weight:700; }
+    h2 { font-family: 'Inter', Arial, sans-serif; font-size: 28px; margin: 0 0 20px 0; color: var(--accent); }
+    h3 { font-family: 'Inter', Arial, sans-serif; font-size: 20px; margin: 0 0 12px 0; }
+    p { color: var(--fg); line-height: 1.6; margin: 0 0 18px 0; font-size: 18px; max-width: 70ch; }
+    .lead { font-size: 18px; color: #f5f4f3; }
+    blockquote { font-style: italic; border-left: 4px solid #7a5a4a; padding-left: 10px; color: #f6f3f0; }
+        /* Управление слайдами */
+        .controls { position: fixed; right: 24px; bottom: 24px; display: flex; gap: 8px; align-items: center; z-index:100; }
     .btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--fg); padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.18s, transform .12s; }
     .btn:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-1px); }
     .btn:focus { outline: 2px solid rgba(255,255,255,0.12); outline-offset: 2px; }
@@ -38,8 +45,11 @@
 
         /* Авторские карточки */
     .authors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; width: 100%; align-items: start; }
-    .author-card { background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; box-shadow: var(--shadow); text-align: left; display:flex; flex-direction:column; align-items:center; gap:8px; }
-    .author-card img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255, 255, 255, 0.08); }
+    .author-card { background: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); text-align: center; display:flex; flex-direction:column; align-items:center; gap:12px; transition: transform .18s ease, box-shadow .18s ease; }
+    .author-card:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+    .author-card img { max-width: 100%; height: auto; width: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255, 255, 255, 0.06); transition: opacity .5s ease; }
+    .author-card a { color: var(--fg); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.06); }
+    .author-card a:hover { color: #a07a5e; }
     /* Немного опустить фото Бальмонта для визуального баланса */
     .author-card[data-title="Константин Бальмонт"] img { transform: translateY(6px); }
     .author-card h3 { margin: 0; font-size: 1rem; text-align:center; }
@@ -47,7 +57,7 @@
 
         /* Карточки для черт и определений */
         .cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; width: 100%; }
-    .card { background: rgba(255,255,255,0.02); padding: 18px; border-radius: 12px; box-shadow: var(--shadow); width: calc(33% - 20px); text-align: center; }
+    .card { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); width: calc(33% - 20px); text-align: center; }
         .card .icon { font-size: 2rem; margin-bottom: 10px; }
         .card h3 { font-size: 1.2rem; margin: 0 0 8px 0; }
         .card p { font-size: 0.95rem; color: var(--muted); }
@@ -56,8 +66,8 @@
     .timeline { width: 100%; position: relative; margin: 20px 0 40px 0; padding-bottom: 40px; }
     .timeline-line { height: 4px; background: rgba(255,255,255,0.07); position: absolute; left: 8%; right: 8%; bottom: 18px; border-radius:3px; }
     .timeline-bubbles { display:flex; gap:18px; justify-content:center; align-items:flex-end; position:relative; z-index:2; flex-wrap:wrap; }
-    .bubble { background: rgba(255,255,255,0.03); padding:10px 14px; border-radius:20px; text-align:center; min-width:140px; box-shadow: var(--shadow); }
-    .bubble .year { font-weight:600; font-size:1rem; color:var(--fg); margin-bottom:6px; }
+    .bubble { background: rgba(255,255,255,0.04); padding:12px 16px; border-radius:20px; text-align:center; min-width:140px; box-shadow: var(--shadow); }
+    .bubble .year { font-weight:700; font-size:1rem; color:var(--fg); margin-bottom:6px; }
     .bubble .desc { font-size:0.95rem; color:var(--muted); }
 
         /* Наследие: круги */
@@ -73,7 +83,7 @@
         /* Генерация звезд в JS */
 
         /* Загрузка */
-    #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--muted); z-index: 60; }
+    #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--muted); z-index: 260; }
 
         /* Фоновые изображения для слайдов */
         .slide[data-index="0"] { background-image: url('https://images.stockcake.com/public/8/f/7/8f775899-9130-4ade-ba4c-8a9aeffade3b_large/books-grow-knowledge-stockcake.jpg'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
@@ -81,24 +91,43 @@
         .slide[data-index="4"] { background-image: url('https://thumbs.dreamstime.com/b/watercolor-misty-landscape-mountain-fog-birds-flying-sky-traditional-oriental-ink-asia-art-style-watercolor-painting-184572208.jpg'); }
         .slide[data-index="9"] { background-image: url('https://www.shutterstock.com/image-vector/line-drawing-floral-book-set-600nw-2502448635.jpg'); background-size: contain; background-position: right bottom; }
 
-        /* Медиа-запросы */
-    @media (max-width: 900px) { .author-card { width: auto; } .card { width: 100%; } .deck { padding: 24px; margin: 16px; } .slide { padding: 64px 20px 64px; } h1{font-size:1.6rem} h2{font-size:1rem} p{font-size:0.95rem} }
+        /* Медиа-запросы и адаптивность */
+        @media (max-width: 900px) { .author-card { width: auto; } .card { width: 100%; } .deck { padding: 24px; margin: 16px; } .slide { padding: 64px 20px 64px; } h1{font-size:24px} h2{font-size:20px} p{font-size:16px} ul{padding-left:15px} }
+        @media (max-width: 480px) { .author-card img{width:110px;height:auto} }
     </style>
 </head>
 <body>
+    <!-- Боковое меню и поиск -->
+    <aside id="sidebar" role="navigation" aria-label="Навигация по разделам" style="position:fixed;left:12px;top:60px;z-index:220;">
+        <div style="background:rgba(0,0,0,0.25);padding:12px;border-radius:8px;backdrop-filter:blur(6px);">
+            <strong style="display:block;margin-bottom:8px;color:var(--fg);font-family:Inter, Arial, sans-serif;">Разделы</strong>
+            <input id="search" placeholder="Поиск по слайдам" style="width:200px;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--fg);margin-bottom:8px" />
+            <nav style="display:block;">
+                <a href="#" data-target="0" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Перейти к началу">Введение</a>
+                <a href="#" data-target="1" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Что такое символизм?">Что такое символизм?</a>
+                <a href="#" data-target="3" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Рождение старшего символизма">Рождение старшего символизма</a>
+                <a href="#" data-target="5" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Мастера старшего символизма">Мастера старшего символизма</a>
+                <a href="#" data-target="7" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Вершины младшего символизма">Вершины младшего символизма</a>
+                <a href="#" data-target="9" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Прощание">Прощание</a>
+            </nav>
+        </div>
+    </aside>
     <div id="loading" role="status" aria-live="polite">Загрузка...</div>
     <div class="deck" id="deck">
         <!-- Слайды по PDF -->
         <section class="slide active" data-index="0">
+            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
             <h1>Символизм в русской литературе</h1>
             <h2>Старший и младший символизм: от возникновения до упадка</h2>
-            <div class="quote">«Искусство — это храм, в котором мы ищем смыслы»</div>
+            <blockquote data-tooltip="Символизм искал скрытые смыслы за видимым">«Искусство — это храм, в котором мы ищем смыслы»</blockquote>
             <div class="note">Управление: ПКМ / Пробел / ↑ — вперед, ← — назад</div>
+            </div>
         </section>
 
         <section class="slide" data-index="1">
+            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
             <h1>Что такое символизм?</h1>
-            <div class="cards">
+            <div class="cards" role="list">
                 <div class="card">
                     <div class="icon">🔤</div>
                     <h3>Язык символов</h3>
@@ -116,9 +145,12 @@
                 </div>
             </div>
             <p>Символизм провозгласил новую эстетику: красота и тайна важнее обыденной правды. Это был бунт против позитивизма и реализма XIX века.</p>
+            </div>
+            </div>
         </section>
 
         <section class="slide" data-index="2">
+            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
             <h1>Истоки и предпосылки</h1>
             <div style="display: flex; width: 100%; gap: 20px; flex-wrap:wrap;">
                 <div style="flex:1; min-width:260px;">
@@ -143,6 +175,7 @@
         </section>
 
         <section class="slide" data-index="3">
+            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
             <h1>Рождение старшего символизма</h1>
             <div class="timeline">
                 <div class="timeline-line"></div>
@@ -162,6 +195,7 @@
                 </div>
             </div>
             <p>1890-е годы стали временем брожения идей. Молодые поэты искали новые формы выражения, отвергая «тенденциозность» народников и натурализм.</p>
+            </div>
         </section>
 
         <section class="slide" data-index="4">
@@ -314,6 +348,8 @@
             slides[i].classList.add('active');
             idx = i;
             updateProgress();
+            // focus for accessibility
+            slides[i].querySelector('.container')?.focus();
         }
 
         function next() { if (idx < slides.length - 1) show(idx + 1); }
@@ -413,7 +449,59 @@
             document.getElementById('loading').style.display = 'none';
             createStars();
             show(0);
+            // sidebar navigation
+            document.querySelectorAll('#sidebar [data-target]').forEach(a=>{
+                a.addEventListener('click', (ev)=>{ ev.preventDefault(); const t = Number(a.dataset.target); show(t); });
+            });
+
+            // search
+            const search = document.getElementById('search');
+            search.addEventListener('input', ()=>{
+                const q = search.value.trim().toLowerCase();
+                if(!q) { // clear highlights
+                    document.querySelectorAll('.slide mark').forEach(m=>{ m.replaceWith(document.createTextNode(m.textContent)); });
+                    return;
+                }
+                slides.forEach(sl=>{
+                    const html = sl.innerHTML;
+                    const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+                    if(re.test(sl.textContent)){
+                        // highlight
+                        sl.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));
+                        sl.innerHTML = sl.innerHTML.replace(re,'<mark style="background:rgba(122,90,74,0.25);color:var(--fg);padding:0 2px;border-radius:2px">$1</mark>');
+                    }
+                });
+            });
+
+            // touch swipe support
+            let touchStartX = 0;
+            document.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].clientX; });
+            document.addEventListener('touchend', e=>{ const dx = e.changedTouches[0].clientX - touchStartX; if(dx < -50) next(); else if(dx > 50) prev(); });
+
+            // export to PDF button
+            const exportBtn = document.createElement('button');
+            exportBtn.className = 'btn'; exportBtn.textContent = 'Экспорт в PDF'; exportBtn.style.marginLeft='8px';
+            exportBtn.addEventListener('click', exportCurrentToPDF);
+            document.querySelector('.controls').appendChild(exportBtn);
         })();
+
+        // Export current slide to PDF (simple text export using jsPDF)
+        async function exportCurrentToPDF(){
+            // lazy-load jsPDF
+            if(typeof window.jspdf === 'undefined'){
+                const s = document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'; document.head.appendChild(s);
+                await new Promise(r=>s.onload=r);
+            }
+            const { jsPDF } = window.jspdf || window.jspdf; // try both
+            const doc = new jsPDF();
+            const container = slides[idx].querySelector('.container') || slides[idx];
+            const text = container.innerText || container.textContent;
+            const lines = doc.splitTextToSize(text, 180);
+            doc.setFont('Times',''); doc.setFontSize(12);
+            doc.text(lines, 10, 10);
+            doc.save('slide-'+idx+'.pdf');
+        }
+        
     </script>
 </body>
 </html>
