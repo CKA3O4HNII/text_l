@@ -1,28 +1,64 @@
-<!-- ...existing code... -->
 <!doctype html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
     <title>Символизм в русской литературе</title>
     <style>
-        body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 24px; background:#f7f7f7; color:#111; }
-        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-radius: 8px; }
+        :root{ --bg:#f7f7f7; --card:#fff; --accent:#2b6cb0; --muted:#6b7280 }
+        html,body{height:100%;}
+        body { font-family: Inter, Arial, Helvetica, sans-serif; margin: 0; padding: 24px; background:var(--bg); color:#111; }
+        .site { max-width: 1000px; margin: 0 auto; }
+        header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px }
+        .brand { font-weight:600; color:var(--accent) }
+        nav a { color:var(--muted); text-decoration:none; margin-left:12px }
+        .card { background:var(--card); padding:20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-radius: 10px; }
         .embed-wrap { display:flex; justify-content:center; }
-        h1 { font-size:1.25rem; margin:0 0 12px 0; }
+        .meta { color:var(--muted); font-size:0.95rem; margin-bottom:12px }
+        footer { margin-top:18px; color:var(--muted); font-size:0.9rem; text-align:center }
+        @media (max-width:640px){ header{flex-direction:column; align-items:flex-start} }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Символизм в русской литературе</h1>
-        <p>Встраиваемый блок:</p>
-        <div class="embed-wrap">
-            <iframe src="https://gamma.app/embed/bvvtoq3980h1pgf"
-                    style="width: 700px; max-width: 100%; height: 450px; border:0;"
-                    allow="fullscreen"
-                    title="Символизм в русской литературе"></iframe>
-        </div>
+    <div class="site">
+        <header>
+            <div>
+                <div class="brand">Символизм — презентация</div>
+                <div style="font-size:0.9rem;color:#444">Адаптировано для GitHub Pages</div>
+            </div>
+            <nav>
+                <a href="#">Главная</a>
+                <a href="#about">О презентации</a>
+                <a href="#source">Исходники</a>
+            </nav>
+        </header>
+
+        <main class="card">
+            <h1 style="margin-top:0;font-size:1.25rem">Символизм в русской литературе</h1>
+            <div class="meta">Интерактивная презентация встраивается через iframe</div>
+
+            <div class="embed-wrap">
+                <iframe src="https://gamma.app/embed/bvvtoq3980h1pgf"
+                                style="width: 700px; max-width: 100%; height: 450px; border:0;"
+                                allow="fullscreen"
+                                title="Символизм в русской литературе"></iframe>
+            </div>
+
+            <section id="about" style="margin-top:16px">
+                <h2 style="font-size:1rem;margin-bottom:8px">О презентации</h2>
+                <p style="color:var(--muted);margin-top:0">Это встраиваемая презентация, размещённая на внешнем сервисе. Здесь мы оборачиваем её в простой статический сайт для публикации через GitHub Pages.</p>
+            </section>
+
+            <section id="source" style="margin-top:12px">
+                <h3 style="font-size:0.95rem;margin-bottom:8px">Исходники</h3>
+                <p style="color:var(--muted);margin-top:0">Файл <code>index.html</code> в корне репозитория содержит сайт. Для автоматического деплоя настроен workflow GitHub Actions.</p>
+            </section>
+        </main>
+
+        <footer>
+            Развёрнуто с помощью GitHub Pages — обновляется при пуше в ветку <code>main</code> (workflow создаёт ветку <code>gh-pages</code>).
+        </footer>
     </div>
 </body>
 </html>
-<!-- ...existing code... -->
