@@ -49,13 +49,13 @@
         .card h3 { font-size: 1.2rem; margin: 0 0 8px 0; }
         .card p { font-size: 0.95rem; color: var(--muted); }
 
-        /* Таймлайн */
-        .timeline { width: 100%; position: relative; margin: 20px 0; }
-        .timeline-line { height: 2px; background: var(--muted); position: absolute; top: 50%; left: 0; right: 0; }
-        .event { position: relative; text-align: center; margin: 0 10%; }
-        .event-number { background: var(--accent); color: var(--bg); width: 30px; height: 30px; line-height: 30px; border-radius: 50%; margin: 0 auto 10px; }
-        .event-year { font-size: 1.2rem; margin-bottom: 5px; }
-        .event-desc { font-size: 1rem; color: var(--muted); }
+    /* Таймлайн — пузырьковая шкала */
+    .timeline { width: 100%; position: relative; margin: 20px 0 40px 0; padding-bottom: 40px; }
+    .timeline-line { height: 4px; background: rgba(255,255,255,0.07); position: absolute; left: 8%; right: 8%; bottom: 18px; border-radius:3px; }
+    .timeline-bubbles { display:flex; gap:18px; justify-content:center; align-items:flex-end; position:relative; z-index:2; flex-wrap:wrap; }
+    .bubble { background: rgba(255,255,255,0.03); padding:10px 14px; border-radius:20px; text-align:center; min-width:140px; box-shadow: var(--shadow); }
+    .bubble .year { font-weight:600; font-size:1rem; color:var(--fg); margin-bottom:6px; }
+    .bubble .desc { font-size:0.95rem; color:var(--muted); }
 
         /* Наследие: круги */
         .charts { display: flex; gap: 40px; justify-content: center; margin: 20px 0; }
@@ -63,10 +63,10 @@
     .circle { width: 100px; height: 100px; border-radius: 50%; border: 10px solid rgba(255,255,255,0.12); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: var(--fg); }
         .partial { border-color: var(--accent) transparent transparent var(--accent); border-width: 10px; transform: rotate(45deg); } /* Пример для 20% */
 
-        /* Анимация падающих звезд */
-    body::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
-    .star { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: fall 10s linear infinite; opacity: 0.12; z-index: 0; }
-        @keyframes fall { 0% { transform: translateY(-100vh) rotate(45deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(45deg); opacity: 0; } }
+    /* Анимация падающих звезд — фиксированная позиция (не влияет на размер страницы) */
+    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
+    .star { position: fixed; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: fall 10s linear infinite; opacity: 0.12; z-index: 0; pointer-events: none; will-change: transform; }
+    @keyframes fall { 0% { transform: translateY(-120vh) translateX(0) rotate(45deg); opacity: 0.9; } 100% { transform: translateY(120vh) translateX(40px) rotate(45deg); opacity: 0; } }
         /* Генерация звезд в JS */
 
         /* Загрузка */
