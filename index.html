@@ -249,6 +249,54 @@
             justify-content: center; 
             width: 100%; 
         }
+
+        /* Targeted slide fixes: make slide 2 (data-index=1) and slide 5 (data-index=4) fit without scroll */
+        .slide[data-index="1"] .container, .slide[data-index="4"] .container {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+        .slide[data-index="1"] img, .slide[data-index="4"] img {
+            max-width: 38%;
+            max-height: 28vh;
+            width: auto;
+            margin: 6px 0;
+        }
+        .slide[data-index="1"] .cards, .slide[data-index="4"] .cards {
+            flex: 1 1 auto;
+            min-width: 220px;
+        }
+        .slide[data-index="4"] .card { width: calc(33% - 12px); }
+
+        /* Author slides (center + smaller photos) — applies to both older and younger author slides */
+        .slide[data-index="5"] .authors-grid, .slide[data-index="7"] .authors-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            justify-items: center;
+        }
+        .slide[data-index="5"] .author-card, .slide[data-index="7"] .author-card {
+            align-items: center; /* center text + image */
+            text-align: center;
+            padding: 12px;
+        }
+        .slide[data-index="5"] .author-card img, .slide[data-index="7"] .author-card img {
+            max-width: 180px;
+            max-height: 22vh;
+            width: auto;
+            margin: 8px auto;
+        }
+
+        /* Reduce heading sizes slightly on crowded slides to save vertical space */
+        .slide[data-index="1"] h1, .slide[data-index="4"] h1, .slide[data-index="5"] h1 { font-size: 28px; }
+        .slide[data-index="1"] h2, .slide[data-index="4"] h2 { font-size: 20px; }
+
+        /* Revert to column layout on small screens to avoid cramped side-by-side */
+        @media (max-width: 768px) {
+            .slide[data-index="1"] .container, .slide[data-index="4"] .container { display: block; }
+            .slide[data-index="1"] img, .slide[data-index="4"] img { max-width: 100%; max-height: 28vh; display: block; }
+            .slide[data-index="5"] .author-card img, .slide[data-index="7"] .author-card img { max-width: 140px; max-height: 20vh; }
+            .slide[data-index="1"] h1, .slide[data-index="4"] h1, .slide[data-index="5"] h1 { font-size: 24px; }
+        }
         .card { 
             background: var(--card-bg); 
             padding: 20px; 
