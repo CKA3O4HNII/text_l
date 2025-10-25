@@ -3,341 +3,693 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages" />
+    <meta name="description" content="Презентация: Символизм в русской литературе — адаптированная для GitHub Pages, оптимизирована для 16:9" />
     <title>Символизм в русской литературе</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Новый визуальный стиль — мистический градиент, типографика PT Serif + Inter */
         :root {
-            --bg-start: #2c1810; /* тёмно-коричневый */
-            --bg-end: #1a0d2e; /* тёмно-фиолетовый */
-            --fg: #e0e0e0; /* светло-серый */
-            --muted: #bdbdbd;
-            --accent: #7a5a4a; /* тёплый акцент */
-            --card-bg: rgba(255,255,255,0.03);
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            --max-width: 800px;
+            --bg-start: #3a2a40; /* мягкий тёмно-фиолетовый */
+            --bg-end: #1f1a2e; /* тёмно-синий */
+            --fg: #ffffff; /* белый для читаемости */
+            --muted: #d0d0d0; /* светло-серый */
+            --accent: #a07a5e; /* тёплый акцент */
+            --highlight: #ffd700; /* золотой для эмодзи и ховера */
+            --card-bg: rgba(255,255,255,0.05);
+            --shadow: 0 6px 12px rgba(0,0,0,0.2);
+            --max-width: 1600px;
         }
-    html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'PT Serif', Georgia, serif; background: linear-gradient(to bottom, var(--bg-start), var(--bg-end)); color: var(--fg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    /* Внешний отступ небольшой — основной сдвиг делаем через внутренний padding слайда */
-    .deck { position: relative; max-width: 1100px; margin: 20px auto; min-height: 72vh; }
-    .slide { position: absolute; inset: 0; padding: 96px 48px 80px; border-radius: 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; opacity: 0; transform: translateX(30px) scale(0.995); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.35s ease; backface-visibility: hidden; background-size: cover; background-position: center; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)); border-radius: 12px; z-index: 1; pointer-events: none; }
-    .slide > * { position: relative; z-index: 2; }
-    .slide.active { opacity: 1; transform: translateX(0) scale(1); z-index: 2; }
-    /* Типографика */
-    h1 { font-family: 'Inter', Arial, sans-serif; font-size: 36px; margin: 0 0 30px 0; letter-spacing: 0.6px; font-weight:700; }
-    h2 { font-family: 'Inter', Arial, sans-serif; font-size: 28px; margin: 0 0 20px 0; color: var(--accent); }
-    h3 { font-family: 'Inter', Arial, sans-serif; font-size: 20px; margin: 0 0 12px 0; }
-    p { color: var(--fg); line-height: 1.6; margin: 0 0 18px 0; font-size: 18px; max-width: 70ch; }
-    .lead { font-size: 18px; color: #f5f4f3; }
-    blockquote { font-style: italic; border-left: 4px solid #7a5a4a; padding-left: 10px; color: #f6f3f0; }
-        /* Управление слайдами */
-        .controls { position: fixed; right: 24px; bottom: 24px; display: flex; gap: 8px; align-items: center; z-index:100; }
-    .btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: var(--fg); padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.18s, transform .12s; }
-    .btn:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-1px); }
-    .btn:focus { outline: 2px solid rgba(255,255,255,0.12); outline-offset: 2px; }
-        .progress { height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; width: 220px; }
-    .progress > i { display: block; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.6)); width: 0%; transition: width 0.4s ease; }
-        .note { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
-        .quote { font-style: italic; color: #fff; margin-top: 10px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
-
-        /* Авторские карточки */
-    .authors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; width: 100%; align-items: start; }
-    .author-card { background: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: var(--shadow); text-align: center; display:flex; flex-direction:column; align-items:center; gap:12px; transition: transform .18s ease, box-shadow .18s ease; }
-    .author-card:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
-    .author-card img { max-width: 100%; height: auto; width: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255, 255, 255, 0.06); transition: opacity .5s ease; }
-    .author-card a { color: var(--fg); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.06); }
-    .author-card a:hover { color: #a07a5e; }
-    /* Немного опустить фото Бальмонта для визуального баланса */
-    .author-card[data-title="Константин Бальмонт"] img { transform: translateY(6px); }
-    .author-card h3 { margin: 0; font-size: 1rem; text-align:center; }
-    .author-card p { font-size: 0.9rem; color: var(--muted); text-align:center; }
-
-        /* Карточки для черт и определений */
-        .cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; width: 100%; }
-    .card { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; box-shadow: var(--shadow); width: calc(33% - 20px); text-align: center; }
-        .card .icon { font-size: 2rem; margin-bottom: 10px; }
-        .card h3 { font-size: 1.2rem; margin: 0 0 8px 0; }
-        .card p { font-size: 0.95rem; color: var(--muted); }
-
-    /* Таймлайн — пузырьковая шкала */
-    .timeline { width: 100%; position: relative; margin: 20px 0 40px 0; padding-bottom: 40px; }
-    .timeline-line { height: 4px; background: rgba(255,255,255,0.07); position: absolute; left: 8%; right: 8%; bottom: 18px; border-radius:3px; }
-    .timeline-bubbles { display:flex; gap:18px; justify-content:center; align-items:flex-end; position:relative; z-index:2; flex-wrap:wrap; }
-    .bubble { background: rgba(255,255,255,0.04); padding:12px 16px; border-radius:20px; text-align:center; min-width:140px; box-shadow: var(--shadow); }
-    .bubble .year { font-weight:700; font-size:1rem; color:var(--fg); margin-bottom:6px; }
-    .bubble .desc { font-size:0.95rem; color:var(--muted); }
-
-        /* Наследие: круги */
-        .charts { display: flex; gap: 40px; justify-content: center; margin: 20px 0; }
-        .chart { text-align: center; }
-    .circle { width: 100px; height: 100px; border-radius: 50%; border: 10px solid rgba(255,255,255,0.12); background: transparent; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: var(--fg); }
-        .partial { border-color: var(--accent) transparent transparent var(--accent); border-width: 10px; transform: rotate(45deg); } /* Пример для 20% */
-
-    /* Анимация падающих звезд — фиксированная позиция (не влияет на размер страницы) */
-    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
-    .star { position: fixed; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: fall 10s linear infinite; opacity: 0.12; z-index: 0; pointer-events: none; will-change: transform; }
-    @keyframes fall { 0% { transform: translateY(-120vh) translateX(0) rotate(45deg); opacity: 0.9; } 100% { transform: translateY(120vh) translateX(40px) rotate(45deg); opacity: 0; } }
-        /* Генерация звезд в JS */
-
-        /* Загрузка */
-    #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--muted); z-index: 260; }
-
-        /* Фоновые изображения для слайдов */
-        .slide[data-index="0"] { background-image: url('https://images.stockcake.com/public/8/f/7/8f775899-9130-4ade-ba4c-8a9aeffade3b_large/books-grow-knowledge-stockcake.jpg'); background-size: contain; background-repeat: no-repeat; background-position: left center; }
-        .slide[data-index="2"] { background-image: url('https://www.shutterstock.com/image-illustration/hand-drawn-watercolor-painting-sunset-260nw-2569515233.jpg'); }
-        .slide[data-index="4"] { background-image: url('https://thumbs.dreamstime.com/b/watercolor-misty-landscape-mountain-fog-birds-flying-sky-traditional-oriental-ink-asia-art-style-watercolor-painting-184572208.jpg'); }
-        .slide[data-index="9"] { background-image: url('https://www.shutterstock.com/image-vector/line-drawing-floral-book-set-600nw-2502448635.jpg'); background-size: contain; background-position: right bottom; }
-
-        /* Медиа-запросы и адаптивность */
-        @media (max-width: 900px) { .author-card { width: auto; } .card { width: 100%; } .deck { padding: 24px; margin: 16px; } .slide { padding: 64px 20px 64px; } h1{font-size:24px} h2{font-size:20px} p{font-size:16px} ul{padding-left:15px} }
-        @media (max-width: 480px) { .author-card img{width:110px;height:auto} }
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            overflow-x: hidden; 
+            font-family: 'Merriweather', Georgia, serif; 
+            background: linear-gradient(to bottom, var(--bg-start), var(--bg-end)); 
+            color: var(--fg); 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+        }
+        .deck { 
+            position: relative; 
+            max-width: var(--max-width); 
+            margin: 20px auto; 
+            min-height: 80vh; 
+        }
+        .slide { 
+            position: absolute; 
+            inset: 0; 
+            padding: 40px 30px; 
+            border-radius: 12px; 
+            box-sizing: border-box; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            justify-content: flex-start; 
+            opacity: 0; 
+            transform: translateX(30px) scale(0.995); 
+            transition: transform 0.5s ease, opacity 0.4s ease; 
+            background: linear-gradient(to bottom, var(--bg-start), var(--bg-end)); 
+            min-height: 80vh; 
+            max-height: 100vh; 
+            overflow: hidden; 
+        }
+        .slide::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)); 
+            border-radius: 12px; 
+            z-index: 1; 
+            pointer-events: none; 
+        }
+        .slide > * { position: relative; z-index: 2; }
+        .slide.active { opacity: 1; transform: translateX(0) scale(1); z-index: 2; }
+        .container { 
+            animation: fadeIn 0.8s ease-in; 
+            max-width: var(--max-width); 
+            margin: 0 auto; 
+            padding: 15px; 
+            tabindex: 0; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        h1 { 
+            font-family: 'Roboto', Arial, sans-serif; 
+            font-size: 36px; 
+            margin: 0 0 20px 0; 
+            font-weight: 700; 
+        }
+        h2 { 
+            font-family: 'Roboto', Arial, sans-serif; 
+            font-size: 28px; 
+            margin: 0 0 20px 0; 
+            color: var(--accent); 
+        }
+        h3 { 
+            font-family: 'Roboto', Arial, sans-serif; 
+            font-size: 22px; 
+            margin: 0 0 15px 0; 
+        }
+        p { 
+            line-height: 1.8; 
+            margin: 0 0 20px 0; 
+            font-size: 18px; 
+            max-width: 70ch; 
+            overflow-wrap: break-word; 
+        }
+        ul, ol { 
+            padding-left: 30px; 
+            margin-bottom: 20px; 
+            list-style-type: square; 
+            color: var(--accent); 
+            font-size: 18px; 
+            line-height: 1.8; 
+        }
+        .lead { font-size: 18px; }
+        blockquote { 
+            font-style: italic; 
+            border-left: 5px solid var(--accent); 
+            padding-left: 15px; 
+            margin: 20px 0; 
+            position: relative; 
+        }
+        blockquote:hover::after { 
+            content: attr(data-tooltip); 
+            position: absolute; 
+            background: var(--accent); 
+            color: #fff; 
+            padding: 8px; 
+            border-radius: 4px; 
+            top: 100%; 
+            left: 20px; 
+            z-index: 3; 
+            font-size: 16px; 
+        }
+        .controls { 
+            position: fixed; 
+            right: 20px; 
+            bottom: 20px; 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; 
+            z-index: 100; 
+        }
+        .btn { 
+            background: var(--accent); 
+            color: #fff; 
+            padding: 12px 16px; 
+            border-radius: 50%; 
+            border: none; 
+            cursor: pointer; 
+            transition: background 0.3s, transform 0.2s; 
+        }
+        .btn:hover { 
+            background: #8c6b4f; 
+            transform: translateY(-2px); 
+        }
+        .btn:focus { 
+            outline: 2px solid var(--highlight); 
+            outline-offset: 2px; 
+        }
+        .menu-btn { 
+            position: fixed; 
+            top: 20px; 
+            left: 20px; 
+            z-index: 230; 
+            font-size: 24px; 
+            padding: 10px; 
+            background: var(--accent); 
+            color: #fff; 
+            border-radius: 8px; 
+        }
+        .progress { 
+            height: 6px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 6px; 
+            overflow: hidden; 
+            width: 250px; 
+        }
+        .progress > i { 
+            display: block; 
+            height: 100%; 
+            background: var(--highlight); 
+            transition: width 0.4s ease; 
+        }
+        .note { 
+            font-size: 16px; 
+            color: var(--muted); 
+            margin-top: 15px; 
+        }
+        .quote { 
+            font-style: italic; 
+            margin-top: 15px; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3); 
+        }
+        .authors-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 20px; 
+            width: 100%; 
+            align-items: start; 
+        }
+        .author-card { 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow); 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 10px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .author-card:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
+        }
+        .author-card img, .slide img { 
+            max-width: 300px; 
+            height: auto; 
+            border-radius: 8px; 
+            margin: 20px auto; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+            transition: opacity 0.5s ease-in-out; 
+            loading: lazy; 
+        }
+        .author-card a { 
+            color: var(--highlight); 
+            text-decoration: none; 
+            border-bottom: 1px dotted var(--highlight); 
+            transition: color 0.3s; 
+        }
+        .author-card a:hover { 
+            color: #e6c200; 
+        }
+        .author-card h3 { 
+            margin: 0; 
+            font-size: 20px; 
+        }
+        .author-card p { 
+            font-size: 16px; 
+            color: var(--muted); 
+        }
+        .cards { 
+            display: flex; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            width: 100%; 
+        }
+        .card { 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow); 
+            width: calc(33% - 15px); 
+            text-align: center; 
+        }
+        .card .icon { 
+            font-size: 2em; 
+            margin-bottom: 10px; 
+            color: var(--highlight); 
+        }
+        .card h3 { 
+            font-size: 20px; 
+            margin: 0 0 10px 0; 
+        }
+        .card p { 
+            font-size: 16px; 
+        }
+        .timeline { 
+            width: 100%; 
+            position: relative; 
+            margin: 20px 0 30px 0; 
+            padding-bottom: 30px; 
+        }
+        .timeline-line { 
+            height: 4px; 
+            background: rgba(255,255,255,0.1); 
+            position: absolute; 
+            left: 10%; 
+            right: 10%; 
+            bottom: 15px; 
+            border-radius: 3px; 
+        }
+        .timeline-bubbles { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            align-items: flex-end; 
+            position: relative; 
+            z-index: 2; 
+            flex-wrap: wrap; 
+        }
+        .bubble { 
+            background: var(--card-bg); 
+            padding: 10px 15px; 
+            border-radius: 15px; 
+            text-align: center; 
+            min-width: 120px; 
+            box-shadow: var(--shadow); 
+        }
+        .bubble .year { 
+            font-weight: 700; 
+            font-size: 16px; 
+            margin-bottom: 6px; 
+        }
+        .bubble .desc { 
+            font-size: 14px; 
+            color: var(--muted); 
+        }
+        .charts { 
+            display: flex; 
+            gap: 30px; 
+            justify-content: center; 
+            margin: 20px 0; 
+        }
+        .chart { 
+            text-align: center; 
+        }
+        .circle { 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
+            border: 8px solid rgba(255,255,255,0.1); 
+            background: transparent; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 18px; 
+            font-weight: bold; 
+        }
+        .partial { 
+            border-color: var(--accent) transparent transparent var(--accent); 
+            border-width: 8px; 
+            transform: rotate(45deg); 
+        }
+        .star { 
+            position: fixed; 
+            width: 2px; 
+            height: 2px; 
+            background: #fff; 
+            border-radius: 50%; 
+            animation: fall 10s linear infinite; 
+            opacity: 0.15; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+        @keyframes fall { 
+            0% { transform: translateY(-120vh) translateX(0) rotate(45deg); opacity: 0.9; } 
+            100% { transform: translateY(120vh) translateX(40px) rotate(45deg); opacity: 0; } 
+        }
+        #loading { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.9); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 18px; 
+            color: var(--muted); 
+            z-index: 260; 
+        }
+        #sidebar { 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            width: 250px; 
+            height: 100%; 
+            z-index: 220; 
+            background: rgba(0,0,0,0.4); 
+            padding: 15px; 
+            border-radius: 0 8px 8px 0; 
+            backdrop-filter: blur(6px); 
+            transform: translateX(-100%); 
+            transition: transform 0.3s ease; 
+        }
+        #sidebar.open { 
+            transform: translateX(0); 
+        }
+        #sidebar a { 
+            color: var(--fg); 
+            text-decoration: none; 
+            margin-bottom: 8px; 
+            display: block; 
+            transition: color 0.3s; 
+        }
+        #sidebar a:hover { 
+            color: var(--highlight); 
+        }
+        #search { 
+            width: 100%; 
+            padding: 8px; 
+            border-radius: 6px; 
+            border: 1px solid var(--accent); 
+            background: transparent; 
+            color: var(--fg); 
+            margin-bottom: 10px; 
+            font-size: 16px; 
+        }
+        @media (max-width: 768px) {
+            .deck { margin: 10px; }
+            .slide { padding: 20px 15px; }
+            h1 { font-size: 28px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            p, ul, ol { font-size: 16px; }
+            .authors-grid { grid-template-columns: 1fr; }
+            .card { width: 100%; }
+            .controls { flex-direction: column; align-items: flex-end; }
+            .progress { width: 150px; }
+            #sidebar { width: 200px; }
+            #search { width: 100%; }
+            .author-card img, .slide img { max-width: 200px; }
+            .cards { gap: 15px; }
+            .timeline-bubbles { gap: 10px; }
+            .bubble { min-width: 100px; }
+        }
+        @media (max-width: 480px) {
+            .author-card img, .slide img { max-width: 150px; }
+            ul, ol { padding-left: 20px; }
+            .bubble { min-width: 80px; }
+            .menu-btn { padding: 8px; font-size: 20px; }
+        }
     </style>
 </head>
 <body>
-    <!-- Боковое меню и поиск -->
-    <aside id="sidebar" role="navigation" aria-label="Навигация по разделам" style="position:fixed;left:12px;top:60px;z-index:220;">
-        <div style="background:rgba(0,0,0,0.25);padding:12px;border-radius:8px;backdrop-filter:blur(6px);">
-            <strong style="display:block;margin-bottom:8px;color:var(--fg);font-family:Inter, Arial, sans-serif;">Разделы</strong>
-            <input id="search" placeholder="Поиск по слайдам" style="width:200px;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--fg);margin-bottom:8px" />
-            <nav style="display:block;">
-                <a href="#" data-target="0" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Перейти к началу">Введение</a>
-                <a href="#" data-target="1" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Что такое символизм?">Что такое символизм?</a>
-                <a href="#" data-target="3" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Рождение старшего символизма">Рождение старшего символизма</a>
-                <a href="#" data-target="5" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Мастера старшего символизма">Мастера старшего символизма</a>
-                <a href="#" data-target="7" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Вершины младшего символизма">Вершины младшего символизма</a>
-                <a href="#" data-target="9" style="display:block;color:var(--muted);text-decoration:none;margin-bottom:6px" title="Прощание">Прощание</a>
+    <button class="menu-btn" id="menu-toggle" aria-label="Открыть/закрыть меню">☰</button>
+    <aside id="sidebar" role="navigation" aria-label="Навигация по разделам">
+        <div>
+            <strong style="display:block;margin-bottom:10px;font-family:'Roboto',Arial,sans-serif;">Разделы</strong>
+            <input id="search" placeholder="Поиск по слайдам" aria-label="Поиск по содержимому слайдов" />
+            <nav>
+                <a href="#" data-target="0" title="Перейти к началу">Введение</a>
+                <a href="#" data-target="1" title="Что такое символизм?">Что такое символизм?</a>
+                <a href="#" data-target="2" title="Истоки и предпосылки">Истоки и предпосылки</a>
+                <a href="#" data-target="3" title="Рождение старшего символизма">Рождение старшего символизма</a>
+                <a href="#" data-target="4" title="Черты старшего символизма">Черты старшего символизма</a>
+                <a href="#" data-target="5" title="Мастера старшего символизма">Мастера старшего символизма</a>
+                <a href="#" data-target="6" title="Младшие символисты">Младшие символисты</a>
+                <a href="#" data-target="7" title="Вершины младшего символизма">Вершины младшего символизма</a>
+                <a href="#" data-target="8" title="Закат символизма">Закат символизма</a>
+                <a href="#" data-target="9" title="Прощание">Прощание</a>
             </nav>
         </div>
     </aside>
     <div id="loading" role="status" aria-live="polite">Загрузка...</div>
     <div class="deck" id="deck">
-        <!-- Слайды по PDF -->
         <section class="slide active" data-index="0">
-            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
-            <h1>Символизм в русской литературе</h1>
-            <h2>Старший и младший символизм: от возникновения до упадка</h2>
-            <blockquote data-tooltip="Символизм искал скрытые смыслы за видимым">«Искусство — это храм, в котором мы ищем смыслы»</blockquote>
-            <div class="note">Управление: ПКМ / Пробел / ↑ — вперед, ← — назад</div>
-            </div>
+            <article class="container">
+                <h1>Символизм в русской литературе</h1>
+                <h2>Старший и младший символизм: от возникновения до упадка</h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Moonlit_night_by_Isaac_Levitan.jpg/300px-Moonlit_night_by_Isaac_Levitan.jpg" alt="Лунная ночь, Исаак Левитан" aria-label="Лунная ночь, символизирующая мистическую эстетику" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <blockquote data-tooltip="Символизм искал скрытые смыслы за видимым">«Искусство — это храм, в котором мы ищем смыслы»</blockquote>
+                <p class="note">Управление: ПКМ / Пробел / ↑ — вперёд, ← — назад</p>
+            </article>
         </section>
-
         <section class="slide" data-index="1">
-            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
-            <h1>Что такое символизм?</h1>
-            <div class="cards" role="list">
-                <div class="card">
-                    <div class="icon">🔤</div>
-                    <h3>Язык символов</h3>
-                    <p>Поэтическое течение, где символ становится мостом между видимым и невидимым, материальным и духовным мирами</p>
+            <article class="container">
+                <h1>Что такое символизм?</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Charles_Baudelaire_by_Nadar.jpg/300px-Charles_Baudelaire_by_Nadar.jpg" alt="Портрет Шарля Бодлера" aria-label="Шарль Бодлер, вдохновитель символизма" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div class="cards" role="list">
+                    <div class="card">
+                        <div class="icon" aria-label="Язык символов">🔤</div>
+                        <h3>Язык символов</h3>
+                        <p>Поэтическое течение, где символ становится мостом между видимым и невидимым, материальным и духовным мирами</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon" aria-label="Метафора реальности">💬</div>
+                        <h3>Метафора реальности</h3>
+                        <p>Отказ от прямого описания в пользу намёка, многозначности, музыкальности слова</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon" aria-label="Интуиция превыше всего">💡</div>
+                        <h3>Интуиция превыше всего</h3>
+                        <p>Познание мира через чувственное восприятие и мистический опыт, а не рациональный анализ</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <div class="icon">💬</div>
-                    <h3>Метафора реальности</h3>
-                    <p>Отказ от прямого описания в пользу намёка, многозначности, музыкальности слова</p>
-                </div>
-                <div class="card">
-                    <div class="icon">💡</div>
-                    <h3>Интуиция превыше всего</h3>
-                    <p>Познание мира через чувственное восприятие и мистический опыт, а не рациональный анализ</p>
-                </div>
-            </div>
-            <p>Символизм провозгласил новую эстетику: красота и тайна важнее обыденной правды. Это был бунт против позитивизма и реализма XIX века.</p>
-            </div>
-            </div>
+                <p>Символизм провозгласил новую эстетику: красота и тайна важнее обыденной правды. Это был бунт против позитивизма и реализма XIX века.</p>
+            </article>
         </section>
-
         <section class="slide" data-index="2">
-            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
-            <h1>Истоки и предпосылки</h1>
-            <div style="display: flex; width: 100%; gap: 20px; flex-wrap:wrap;">
-                <div style="flex:1; min-width:260px;">
-                    <h2>Европейское влияние</h2>
-                    <p>Французский символизм Бодлера, Верлена, Рембо стал образцом для русских поэтов. Идеи «чистого искусства» и эстетизма проникли в Россию через переводы и личные контакты.</p>
-                    <ul>
-                        <li>Шарль Бодлер — теория соответствий</li>
-                        <li>Поль Верлен — музыкальность стиха</li>
-                        <li>Артюр Рембо — визионерская поэзия</li>
-                    </ul>
+            <article class="container">
+                <h1>Истоки и предпосылки</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Old_book.jpg/300px-Old_book.jpg" alt="Старинная книга" aria-label="Старинная книга, символ знаний" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div style="display: flex; width: 100%; gap: 20px; flex-wrap:wrap;">
+                    <div style="flex:1; min-width:260px;">
+                        <h2>Европейское влияние</h2>
+                        <p>Французский символизм Бодлера, Верлена, Рембо стал образцом для русских поэтов. Идеи «чистого искусства» и эстетизма проникли в Россию через переводы и личные контакты.</p>
+                        <ul>
+                            <li>Шарль Бодлер — теория соответствий</li>
+                            <li>Поль Верлен — музыкальность стиха</li>
+                            <li>Артюр Рембо — визионерская поэзия</li>
+                        </ul>
+                    </div>
+                    <div style="flex:1; min-width:260px;">
+                        <h2>Философские основы</h2>
+                        <p>Ницшеанство с культом сверхчеловека, теософия Блаватской, идеи Владимира Соловьёва о Софии и Вечной Женственности питали символистскую мысль.</p>
+                        <ul>
+                            <li>Фридрих Ницше — переоценка ценностей</li>
+                            <li>Владимир Соловьёв — философия всеединства</li>
+                            <li>Елена Блаватская — эзотерические учения</li>
+                        </ul>
+                    </div>
                 </div>
-                <div style="flex:1; min-width:260px;">
-                    <h2>Философские основы</h2>
-                    <p>Ницшеанство с культом сверхчеловека, теософия Блаватской, идеи Владимира Соловьёва о Софии и Вечной Женственности питали символистскую мысль.</p>
-                    <ul>
-                        <li>Фридрих Ницше — переоценка ценностей</li>
-                        <li>Владимир Соловьёв — философия всеединства</li>
-                        <li>Елена Блаватская — эзотерические учения</li>
-                    </ul>
-                </div>
-            </div>
+            </article>
         </section>
-
         <section class="slide" data-index="3">
-            <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:20px;">
-            <h1>Рождение старшего символизма</h1>
-            <div class="timeline">
-                <div class="timeline-line"></div>
-                <div class="timeline-bubbles">
-                    <div class="bubble">
-                        <div class="year">1892</div>
-                        <div class="desc">Мережковский: манифест и первые идеи русского символизма</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1894</div>
-                        <div class="desc">Первое значимое творчество Брюсова — формирование эстетики движения</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1895–1899</div>
-                        <div class="desc">Создание кружков, альманахов и журналов — консолидация течения</div>
+            <article class="container">
+                <h1>Рождение старшего символизма</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Moon_over_the_sea.jpg/300px-Moon_over_the_sea.jpg" alt="Луна над морем" aria-label="Луна над морем, символ мистики" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-bubbles">
+                        <div class="bubble">
+                            <div class="year">1892</div>
+                            <div class="desc">Мережковский: манифест и первые идеи русского символизма</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1894</div>
+                            <div class="desc">Первое значимое творчество Брюсова — формирование эстетики движения</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1895–1899</div>
+                            <div class="desc">Создание кружков, альманахов и журналов — консолидация течения</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <p>1890-е годы стали временем брожения идей. Молодые поэты искали новые формы выражения, отвергая «тенденциозность» народников и натурализм.</p>
-            </div>
+                <p>1890-е годы стали временем брожения идей. Молодые поэты искали новые формы выражения, отвергая «тенденциозность» народников и натурализм.</p>
+            </article>
         </section>
-
         <section class="slide" data-index="4">
-            <h1>Черты старшего символизма</h1>
-            <div class="cards">
-                <div class="card">
-                    <div class="icon">💀</div>
-                    <h3>Декадентство</h3>
-                    <p>Культ изысканности, утончённости, болезненной красоты. Темы смерти, увядания, упадка цивилизации пронизывают поэзию.</p>
+            <article class="container">
+                <h1>Черты старшего символизма</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Moon_over_the_sea.jpg/300px-Moon_over_the_sea.jpg" alt="Луна над морем" aria-label="Луна над морем, символ мистики" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div class="cards">
+                    <div class="card">
+                        <div class="icon" aria-label="Декадентство">💀</div>
+                        <h3>Декадентство</h3>
+                        <p>Культ изысканности, утончённости, болезненной красоты. Темы смерти, увядания, упадка цивилизации пронизывают поэзию.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon" aria-label="Индивидуализм">👤</div>
+                        <h3>Индивидуализм</h3>
+                        <p>Поэт — жрец искусства, одиночка, противопоставленный толпе. Эстетизм как форма самоутверждения.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon" aria-label="Мистические мотивы">✨</div>
+                        <h3>Мистические мотивы</h3>
+                        <p>Интерес к оккультизму, древним религиям, мистическому опыту. Символы: звезда, луна, сумерки, туман.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <div class="icon">👤</div>
-                    <h3>Индивидуализм</h3>
-                    <p>Поэт — жрец искусства, одиночка, противопоставленный толпе. Эстетизм как форма самоутверждения.</p>
-                </div>
-                <div class="card">
-                    <div class="icon">✨</div>
-                    <h3>Мистические мотивы</h3>
-                    <p>Интерес к оккультизму, древним религиям, мистическому опыту. Символы: звезда, луна, сумерки, туман.</p>
-                </div>
-            </div>
+            </article>
         </section>
-
         <section class="slide" data-index="5">
-            <h1>Мастера старшего символизма</h1>
-            <div class="authors-grid">
-                <div class="author-card" data-title="Валерий Брюсов">
-                    <img alt="Портрет Валерия Брюсова" src="" />
-                    <h3>Валерий Брюсов</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Я люблю большие дома...», «Творчество»</p>
+            <article class="container">
+                <h1>Мастера старшего символизма</h1>
+                <div class="authors-grid">
+                    <div class="author-card" data-title="Валерий Брюсов">
+                        <img alt="Портрет Валерия Брюсова" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Valery_Bryusov.jpg/300px-Valery_Bryusov.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Валерий Брюсов</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Я люблю большие дома...», «Творчество»</p>
+                        <a href="https://ru.wikipedia.org/wiki/Брюсов,_Валерий_Яковлевич" target="_blank" title="Подробнее о Валерии Брюсове">Узнать больше</a>
+                    </div>
+                    <div class="author-card" data-title="Константин Бальмонт">
+                        <img alt="Портрет Константина Бальмонта" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Konstantin_Balmont.jpg/300px-Konstantin_Balmont.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Константин Бальмонт</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Будем как солнце», «Только любовь»</p>
+                        <a href="https://ru.wikipedia.org/wiki/Бальмонт,_Константин_Дмитриевич" target="_blank" title="Подробнее о Константине Бальмонте">Узнать больше</a>
+                    </div>
+                    <div class="author-card" data-title="Зинаида Гиппиус">
+                        <img alt="Портрет Зинаиды Гиппиус" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Zinaida_Gippius.jpg/300px-Zinaida_Gippius.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Зинаида Гиппиус</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Песня», «Она»</p>
+                        <a href="https://ru.wikipedia.org/wiki/Гиппиус,_Зинаида_Николаевна" target="_blank" title="Подробнее о Зинаиде Гиппиус">Узнать больше</a>
+                    </div>
+                    <div class="author-card" data-title="Дмитрий Мережковский">
+                        <img alt="Портрет Дмитрия Мережковского" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Dmitry_Merezhkovsky.jpg/300px-Dmitry_Merezhkovsky.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Дмитрий Мережковский</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">Трилогия «Христос и Антихрист»</p>
+                        <a href="https://ru.wikipedia.org/wiki/Мережковский,_Дмитрий_Сергеевич" target="_blank" title="Подробнее о Дмитрии Мережковском">Узнать больше</a>
+                    </div>
                 </div>
-                <div class="author-card" data-title="Константин Бальмонт">
-                    <img alt="Портрет Константина Бальмонта" src="" />
-                    <h3>Константин Бальмонт</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Будем как солнце», «Только любовь»</p>
-                </div>
-                <div class="author-card" data-title="Зинаида Гиппиус">
-                    <img alt="Портрет Зинаиды Гиппиус" src="" />
-                    <h3>Зинаида Гиппиус</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Песня», «Она»</p>
-                </div>
-                <div class="author-card" data-title="Дмитрий Мережковский">
-                    <img alt="Портрет Дмитрия Мережковского" src="" />
-                    <h3>Дмитрий Мережковский</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">Трилогия «Христос и Антихрист»</p>
-                </div>
-            </div>
+            </article>
         </section>
-
         <section class="slide" data-index="6">
-            <h1>Младшие символисты: новое поколение</h1>
-            <div class="timeline">
-                <div class="timeline-line"></div>
-                <div class="timeline-bubbles">
-                    <div class="bubble">
-                        <div class="year">1900–1904</div>
-                        <div class="desc">Кризис декадентства и переход к религиозным исканиям</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1902–1906</div>
-                        <div class="desc">От эстетизма к теургии — идея преображения через искусство</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1905</div>
-                        <div class="desc">Революция 1905 года — поэты откликаются на социальные изменения</div>
+            <article class="container">
+                <h1>Младшие символисты: новое поколение</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Revolution_1905.jpg/300px-Revolution_1905.jpg" alt="Революция 1905 года" aria-label="Революция 1905 года, социальный контекст" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-bubbles">
+                        <div class="bubble">
+                            <div class="year">1900–1904</div>
+                            <div class="desc">Кризис декадентства и переход к религиозным исканиям</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1902–1906</div>
+                            <div class="desc">От эстетизма к теургии — идея преображения через искусство</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1905</div>
+                            <div class="desc">Революция 1905 года — поэты откликаются на социальные изменения</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <p>Младосимволисты отошли от индивидуализма «старших». Вдохновлённые идеями Владимира Соловьёва, они видели в поэзии путь к духовному преображению человечества. Революция 1905 года всколыхнула общество. Поэты откликнулись на социальные потрясения, но не отказались от мистических прозрений.</p>
+                <p>Младосимволисты отошли от индивидуализма «старших». Вдохновлённые идеями Владимира Соловьёва, они видели в поэзии путь к духовному преображению человечества.</p>
+            </article>
         </section>
-
         <section class="slide" data-index="7">
-            <h1>Вершины младшего символизма</h1>
-            <div class="authors-grid">
-                <div class="author-card" data-title="Александр Блок">
-                    <img alt="Портрет Александра Блока" src="" />
-                    <h3>Александр Блок</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Стихи о Прекрасной Даме», «Двенадцать», поэма «Возмездие» • Культ Вечной Женственности • Трагедия поэта между идеалом и реальностью • Музыкальность и философская глубина</p>
+            <article class="container">
+                <h1>Вершины младшего символизма</h1>
+                <div class="authors-grid">
+                    <div class="author-card" data-title="Александр Блок">
+                        <img alt="Портрет Александра Блока" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Alexander_Blok.jpg/300px-Alexander_Blok.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Александр Блок</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Стихи о Прекрасной Даме», «Двенадцать», поэма «Возмездие» • Культ Вечной Женственности</p>
+                        <a href="https://ru.wikipedia.org/wiki/Блок,_Александр_Александрович" target="_blank" title="Подробнее о Александре Блоке">Узнать больше</a>
+                    </div>
+                    <div class="author-card" data-title="Андрей Белый">
+                        <img alt="Портрет Андрея Белого" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Andrei_Bely.jpg/300px-Andrei_Bely.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Андрей Белый</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Золото в лазури», роман «Петербург», «Симфонии» • Эксперименты с ритмом</p>
+                        <a href="https://ru.wikipedia.org/wiki/Белый,_Андрей" target="_blank" title="Подробнее об Андрее Белом">Узнать больше</a>
+                    </div>
+                    <div class="author-card" data-title="Вячеслав Иванов">
+                        <img alt="Портрет Вячеслава Иванова" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Vyacheslav_Ivanov.jpg/300px-Vyacheslav_Ivanov.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                        <h3>Вячеслав Иванов</h3>
+                        <p class="bio">Загрузка...</p>
+                        <p class="work-link">«Кормчие звёзды», «Прозрачность» • Дионисийские мотивы</p>
+                        <a href="https://ru.wikipedia.org/wiki/Иванов,_Вячеслав_Иванович" target="_blank" title="Подробнее о Вячеславе Иванове">Узнать больше</a>
+                    </div>
                 </div>
-                <div class="author-card" data-title="Андрей Белый">
-                    <img alt="Портрет Андрея Белого" src="" />
-                    <h3>Андрей Белый</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Золото в лазури», роман «Петербург», «Симфонии» • Эксперименты с ритмом и формой • Философия антропософии • Синтез поэзии и прозы</p>
-                </div>
-                <div class="author-card" data-title="Вячеслав Иванов">
-                    <img alt="Портрет Вячеслава Иванова" src="" />
-                    <h3>Вячеслав Иванов</h3>
-                    <p class="bio">Загрузка...</p>
-                    <p class="work-link">«Кормчие звёзды», «Прозрачность», теория соборного театра • Дионисийские мотивы • Архаизация языка • Культ античности и христианства</p>
-                </div>
-            </div>
+            </article>
         </section>
-
         <section class="slide" data-index="8">
-            <h1>Закат символизма</h1>
-            <div class="timeline">
-                <div class="timeline-line"></div>
-                <div class="timeline-bubbles">
-                    <div class="bubble">
-                        <div class="year">1910</div>
-                        <div class="desc">Кризис символизма — внутренние противоречия и переосмысление</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1910–1913</div>
-                        <div class="desc">Рост акмеизма и футуризма — новые художественные программы</div>
-                    </div>
-                    <div class="bubble">
-                        <div class="year">1914–1917</div>
-                        <div class="desc">Первая мировая и революция — окончательное переломление культурного ландшафта</div>
+            <article class="container">
+                <h1>Закат символизма</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Sunset_over_the_sea.jpg/300px-Sunset_over_the_sea.jpg" alt="Закат над морем" aria-label="Закат, символ упадка символизма" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-bubbles">
+                        <div class="bubble">
+                            <div class="year">1910</div>
+                            <div class="desc">Кризис символизма — внутренние противоречия</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1910–1913</div>
+                            <div class="desc">Рост акмеизма и футуризма</div>
+                        </div>
+                        <div class="bubble">
+                            <div class="year">1914–1917</div>
+                            <div class="desc">Первая мировая и революция</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="quote">«Символизм закончился. Он закончился потому, что исчерпал себя.» — Николай Гумилёв, 1913</div>
+                <div class="quote" data-tooltip="Цитата отражает переход к новым течениям">«Символизм закончился. Он закончился потому, что исчерпал себя.» — Николай Гумилёв, 1913</div>
+            </article>
         </section>
-
         <section class="slide" data-index="9">
-            <h1>Спасибо за внимание</h1>
-            <p class="lead">Спасибо за просмотр презентации о символизме в русской литературе.</p>
-            <p>Если хотите посмотреть источники и полные биографии авторов — откройте страницы на Википедии (ссылки в карточках авторов). Можете использовать навигацию для возврата к интересующим слайдам.</p>
-            <div style="margin-top:18px; display:flex; gap:12px; align-items:center;">
-                <a href="https://github.com/" target="_blank" style="color:var(--fg); text-decoration:underline;">Репозиторий проекта</a>
-                <span style="color:var(--muted);">•</span>
-                <button class="btn" onclick="show(0)">Начать сначала</button>
-            </div>
-            <p class="note" style="margin-top:18px">Контакты и дополнительные материалы можно добавить сюда. Хорошего дня!</p>
+            <article class="container">
+                <h1>Спасибо за внимание</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Open_book_with_candle.jpg/300px-Open_book_with_candle.jpg" alt="Книга и свеча" aria-label="Книга и свеча, символ завершения" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'" />
+                <p class="lead">Спасибо за просмотр презентации о символизме в русской литературе.</p>
+                <p>Если хотите узнать больше, перейдите по ссылкам на Википедию в карточках авторов или изучите источники ниже.</p>
+                <div class="sources">
+                    <h3>Источники</h3>
+                    <ul>
+                        <li><a href="https://ru.wikipedia.org/wiki/Символизм" target="_blank">Википедия: Символизм</a></li>
+                        <li>Краткая литературная энциклопедия, 1962–1978</li>
+                        <li>История русской литературы конца XIX – начала XX века, под ред. Д. Н. Медведева</li>
+                    </ul>
+                </div>
+                <div style="margin-top:20px; display:flex; gap:12px; align-items:center;">
+                    <a href="https://github.com/cka3o4hnii/text_l" target="_blank" style="color:var(--highlight); text-decoration:underline;">Репозиторий проекта</a>
+                    <span style="color:var(--muted);">•</span>
+                    <button class="btn" onclick="show(0)">Начать сначала</button>
+                </div>
+                <p class="note">Контакты: <a href="mailto:example@email.com" style="color:var(--highlight);">example@email.com</a></p>
+            </article>
         </section>
     </div>
-
-    <div class="controls" aria-hidden>
-        <button class="btn" id="prev" aria-label="Назад">← Назад</button>
+    <div class="controls" aria-label="Управление слайдами">
+        <button class="btn" id="prev" aria-label="Перейти к предыдущему слайду">←</button>
         <div class="progress" title="Прогресс"><i id="prog"></i></div>
-        <button class="btn" id="next" aria-label="Вперед">Вперёд →</button>
+        <button class="btn" id="next" aria-label="Перейти к следующему слайду">→</button>
     </div>
-
     <script>
-        // Навигация и загрузка
         const slides = Array.from(document.querySelectorAll('.slide'));
         let idx = 0;
 
@@ -348,7 +700,6 @@
             slides[i].classList.add('active');
             idx = i;
             updateProgress();
-            // focus for accessibility
             slides[i].querySelector('.container')?.focus();
         }
 
@@ -370,25 +721,28 @@
             document.getElementById('prog').style.width = p + '%';
         }
 
-        // Авторы
         const authors = [
-            'Валерий Брюсов', 'Константин Бальмонт', 'Зинаида Гиппиус',
-            'Дмитрий Мережковский', 'Александр Блок', 'Андрей Белый', 'Вячеслав Иванов'
+            { name: 'Валерий Брюсов', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Valery_Bryusov.jpg/300px-Valery_Bryusov.jpg' },
+            { name: 'Константин Бальмонт', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Konstantin_Balmont.jpg/300px-Konstantin_Balmont.jpg' },
+            { name: 'Зинаида Гиппиус', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Zinaida_Gippius.jpg/300px-Zinaida_Gippius.jpg' },
+            { name: 'Дмитрий Мережковский', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Dmitry_Merezhkovsky.jpg/300px-Dmitry_Merezhkovsky.jpg' },
+            { name: 'Александр Блок', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Alexander_Blok.jpg/300px-Alexander_Blok.jpg' },
+            { name: 'Андрей Белый', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Andrei_Bely.jpg/300px-Andrei_Bely.jpg' },
+            { name: 'Вячеслав Иванов', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Vyacheslav_Ivanov.jpg/300px-Vyacheslav_Ivanov.jpg' }
         ];
 
         async function loadAllWiki() {
-            const promises = authors.map(title =>
-                fetch('https://ru.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title))
+            const promises = authors.map(author =>
+                fetch(`https://ru.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(author.name)}`)
                     .then(r => r.ok ? r.json() : Promise.reject(r))
                     .catch(() => null)
             );
             const results = await Promise.all(promises);
             const map = {};
             results.forEach((data, i) => {
-                if (data) map[authors[i]] = data;
+                if (data) map[authors[i].name] = data;
             });
 
-            // Пройтись по каждой карточке и заполнить из map; при отсутствии thumbnail делать дополнительный запрос media-list
             for (const card of document.querySelectorAll('.author-card')) {
                 const title = card.dataset.title;
                 const data = map[title];
@@ -396,40 +750,18 @@
                 const bio = card.querySelector('.bio');
                 if (data) {
                     const text = data.extract ? data.extract : (data.description || '');
-                    bio.textContent = text.length > 220 ? text.slice(0, 220).replace(/\s\S*$/, '...') : text;
-                    // если есть thumbnail — используем, иначе пробуем media-list
+                    bio.textContent = text.length > 200 ? text.slice(0, 200).replace(/\s\S*$/, '...') : text;
                     if (data.thumbnail && data.thumbnail.source) {
                         img.src = data.thumbnail.source;
-                    } else {
-                        // попытка получить изображение из media-list
-                        try {
-                            const mres = await fetch('https://ru.wikipedia.org/api/rest_v1/page/media-list/' + encodeURIComponent(title));
-                            if (mres.ok) {
-                                const mjson = await mres.json();
-                                if (mjson && Array.isArray(mjson.items) && mjson.items.length) {
-                                    // найти первый элемент типа image с srcset или src
-                                    const imgItem = mjson.items.find(it => it.type === 'image' && (it.srcset || it.src));
-                                    if (imgItem) {
-                                        img.src = (imgItem.srcset && imgItem.srcset.length) ? imgItem.srcset[imgItem.srcset.length-1].src : (imgItem.src || imgItem.url || '');
-                                    }
-                                }
-                            }
-                        } catch (e) {
-                            // ignore
-                        }
-                        if (!img.src) img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
                     }
-                    img.alt = title + ' — портрет';
                 } else {
                     bio.textContent = 'Биография недоступна.';
-                    img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg';
                 }
             }
         }
 
-        // Анимация звезд
         function createStars() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
@@ -439,7 +771,6 @@
             }
         }
 
-        // Инициализация
         (async function() {
             try {
                 await loadAllWiki();
@@ -449,59 +780,47 @@
             document.getElementById('loading').style.display = 'none';
             createStars();
             show(0);
-            // sidebar navigation
-            document.querySelectorAll('#sidebar [data-target]').forEach(a=>{
-                a.addEventListener('click', (ev)=>{ ev.preventDefault(); const t = Number(a.dataset.target); show(t); });
+            document.querySelectorAll('#sidebar [data-target]').forEach(a => {
+                a.addEventListener('click', (ev) => { 
+                    ev.preventDefault(); 
+                    show(Number(a.dataset.target)); 
+                    document.getElementById('sidebar').classList.remove('open');
+                });
             });
-
-            // search
             const search = document.getElementById('search');
-            search.addEventListener('input', ()=>{
+            search.addEventListener('input', () => {
                 const q = search.value.trim().toLowerCase();
-                if(!q) { // clear highlights
-                    document.querySelectorAll('.slide mark').forEach(m=>{ m.replaceWith(document.createTextNode(m.textContent)); });
+                if (!q) {
+                    document.querySelectorAll('.slide mark').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
                     return;
                 }
-                slides.forEach(sl=>{
+                slides.forEach(sl => {
                     const html = sl.innerHTML;
-                    const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
-                    if(re.test(sl.textContent)){
-                        // highlight
-                        sl.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));
-                        sl.innerHTML = sl.innerHTML.replace(re,'<mark style="background:rgba(122,90,74,0.25);color:var(--fg);padding:0 2px;border-radius:2px">$1</mark>');
+                    const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+                    if (re.test(sl.textContent)) {
+                        sl.querySelectorAll('mark').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+                        sl.innerHTML = html.replace(re, '<mark style="background:rgba(255,215,0,0.3);color:var(--fg);padding:0 3px;border-radius:3px">$1</mark>');
                     }
                 });
             });
-
-            // touch swipe support
             let touchStartX = 0;
-            document.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].clientX; });
-            document.addEventListener('touchend', e=>{ const dx = e.changedTouches[0].clientX - touchStartX; if(dx < -50) next(); else if(dx > 50) prev(); });
-
-            // export to PDF button
-            const exportBtn = document.createElement('button');
-            exportBtn.className = 'btn'; exportBtn.textContent = 'Экспорт в PDF'; exportBtn.style.marginLeft='8px';
-            exportBtn.addEventListener('click', exportCurrentToPDF);
-            document.querySelector('.controls').appendChild(exportBtn);
+            document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; });
+            document.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (dx < -50) next();
+                else if (dx > 50) prev();
+            });
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menu-toggle');
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            });
         })();
-
-        // Export current slide to PDF (simple text export using jsPDF)
-        async function exportCurrentToPDF(){
-            // lazy-load jsPDF
-            if(typeof window.jspdf === 'undefined'){
-                const s = document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'; document.head.appendChild(s);
-                await new Promise(r=>s.onload=r);
-            }
-            const { jsPDF } = window.jspdf || window.jspdf; // try both
-            const doc = new jsPDF();
-            const container = slides[idx].querySelector('.container') || slides[idx];
-            const text = container.innerText || container.textContent;
-            const lines = doc.splitTextToSize(text, 180);
-            doc.setFont('Times',''); doc.setFontSize(12);
-            doc.text(lines, 10, 10);
-            doc.save('slide-'+idx+'.pdf');
-        }
-        
     </script>
 </body>
 </html>
